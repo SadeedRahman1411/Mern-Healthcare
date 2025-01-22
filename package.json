@@ -1,0 +1,33 @@
+{
+  "name": "doc-appointment",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "ASAP",
+  "license": "Syntax_ASAP",
+  "description": "",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.2.1",
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.9",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "^3.0.1",
+    "web-vitals": "^2.1.0",
+    "webpack": "^5.97.1"
+  }
+}

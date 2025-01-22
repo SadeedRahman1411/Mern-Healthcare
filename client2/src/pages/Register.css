@@ -1,0 +1,87 @@
+/* Container styling */
+.registration-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+  position: relative; /* Enables positioning of the home icon */
+}
+
+/* Form styling */
+.registration-form {
+  max-width: 600px;
+  width: 100%;
+  background: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.registration-title {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 220px; /* Adjusted this value to push the heading lower */
+  font-size: 15px; /* Adjust as needed */
+}
+
+/* Full-width utility class */
+.full-width {
+  width: 100%;
+}
+.login-button {
+  width: 100%;
+  text-align: center;
+  margin-top: 16px;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.login-section {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.login-section span {
+  color: #000; /* Static text color */
+  cursor: default; /* No hover effect on static text */
+}
+
+.login-link {
+  color: #1890ff; /* Link text color */
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.login-link:hover {
+  color: #7abdf3; /* Hover effect only for the link */
+  text-decoration: none;
+}
+.login-link:active {
+  color: red; /* Hover effect only for the link */
+  text-decoration: none;
+}
+/* Home Icon styling */
+
+.home-link {
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  left: 10px; /* Adjust as needed */
+  font-size: 24px; /* Controls emoji size */
+  color: #000; /* Default color */
+  text-decoration: none;
+}
+
+.home-link:hover {
+  color: #1890ff; /* Hover color */
+}
+
+.home-link span {
+  display: inline-block;
+  line-height: 1; /* Keeps emoji centered vertically */
+}
