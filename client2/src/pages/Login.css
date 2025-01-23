@@ -1,20 +1,29 @@
 /* Login.css */
+
 .login-container {
   display: flex;
   justify-content: center;
+  align-items: center; /* Center vertically and horizontally */
   flex-direction: column;
-  align-items: center;
-  height: 100vh;
+  min-height: 100vh; /* Ensure it always covers the entire viewport height */
   background-color: #f5f5f5;
+  padding: 16px; /* Add padding for smaller screens */
+  box-sizing: border-box; /* Include padding in height calculation */
 }
 
 .login-form {
-  max-width: 600px;
+  max-width: 90%; /* Make the form cover most of the screen width */
   width: 100%;
   background: #fff;
   padding: 24px;
   border-radius: 8px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+  min-height: 400px; /* Increase the minimum height */
+}
+
+.login-form:hover {
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3); /* Subtle hover effect */
 }
 
 .login-remember {
@@ -44,4 +53,35 @@
 
 .register-link-text:active {
   color: #096dd9; /* Darker blue on active */
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+  .login-container {
+    padding: 24px; /* Increase padding for smaller screens */
+  }
+
+  .login-form {
+    padding: 16px; /* Reduce padding for smaller screens */
+    max-width: 95%; /* Make the form nearly full-width */
+    min-height: 360px; /* Adjust height for smaller screens */
+  }
+
+  .register-link {
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .login-form {
+    padding: 12px; /* Further reduce padding for very small screens */
+    border-radius: 4px; /* Slightly smaller border radius */
+    max-width: 100%; /* Use full width for very small screens */
+    min-height: 320px; /* Adjust height for very small screens */
+  }
+
+  .register-link {
+    font-size: 10px; /* Adjust font size for very small screens */
+  }
 }
