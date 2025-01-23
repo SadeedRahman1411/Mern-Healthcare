@@ -1,0 +1,137 @@
+/* General styles for homepage */
+.homepage {
+  font-family: Arial, sans-serif;
+}
+
+/* Navigation Bar */
+.navbar {
+  background-color: #222831;
+}
+
+.navbar .nav-link {
+  color: #eeeeee;
+  font-weight: bold;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+  color: #00adb5;
+  transform: scale(1.05);
+}
+
+.navbar .btn-outline-primary {
+  color: #00adb5;
+  border-color: #00adb5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar .btn-outline-primary:hover {
+  background-color: #00adb5;
+  color: #eeeeee;
+}
+
+/* Hero Section */
+header {
+  background-color: #f8f9fa;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+header .lead {
+  font-size: 1.25rem;
+  color: #6c757d;
+}
+
+.search-bar {
+  max-width: 600px;
+  margin-top: 2rem;
+}
+
+.search-bar input {
+  border-radius: 25px;
+  padding: 12px;
+  font-size: 1rem;
+  width: 80%;
+}
+
+.search-bar button {
+  border-radius: 25px;
+  padding: 12px 20px;
+  margin-left: 10px;
+  font-size: 1rem;
+}
+
+/* Services Section */
+section {
+  background-color: #f1f3f5;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.card {
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  border-radius: 15px 15px 0 0;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+.card .btn-outline-primary {
+  border-radius: 20px;
+  font-size: 1rem;
+  padding: 10px 20px;
+  color: #007bff;
+  border-color: #007bff;
+  background-color: rgba(0, 123, 255, 0.1); /* Slight background color */
+  transition: all 0.3s ease;
+}
+
+.card .btn-outline-primary:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-bar {
+      width: 100%;
+      margin-top: 1rem;
+  }
+
+  .card-img-top {
+      height: 180px;
+  }
+
+  .card .btn-outline-primary {
+      font-size: 0.9rem;
+  }
+}
