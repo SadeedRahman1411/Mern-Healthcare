@@ -32,21 +32,6 @@ const AmbulanceService = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Find Doctor
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Find Hospital
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Find Ambulance
-                </Link>
-              </li>
-              <li className="nav-item">
                 <Link className="btn btn-outline-primary ms-2" to="/login">
                   Sign In
                 </Link>
@@ -77,7 +62,7 @@ const AmbulanceService = () => {
       <section className="container py-5">
         <h2 className="text-center mb-4 text-primary">Ambulance Services We Offer</h2>
         <div className="row g-4">
-          {[
+          {[ 
             {
               title: "AC Ambulance",
               description:

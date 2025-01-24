@@ -20,6 +20,16 @@
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease;
   min-height: 400px; /* Increase the minimum height */
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.login-form h2 {
+  margin-bottom: 24px; /* Add spacing between the heading and form elements */
+  font-size: 24px; /* Heading font size */
+  color: #333; /* Color of the heading */
 }
 
 .login-form:hover {

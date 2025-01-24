@@ -9,10 +9,10 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Bootstrap JS (optional)
 function DoctorHome() {
   return (
     <div className="App">
-      {/* Navigation Bar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      {/* Simplified Navigation Bar */}
+      <nav className="navbar navbar-expand-lg navbar-dark">
         <div className="container">
-          <a className="navbar-brand" href="#">ASAP Health Care Service</a>
+          <a className="navbar-brand" href="/">ASAP Health Care Service</a>
           <button
             className="navbar-toggler"
             type="button"
@@ -27,16 +27,7 @@ function DoctorHome() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <a className="nav-link" href="#">Find Doctor</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Find Hospital</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Find Ambulance</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link btn btn-outline-info px-3 py-1" href="#">Sign In</a>
+                <a className="btn btn-outline-primary ms-2" href="/login">Sign In</a>
               </li>
             </ul>
           </div>
@@ -75,7 +66,7 @@ function DoctorHome() {
                 <h5 className="card-title text-primary">Home Centric Primary Care!</h5>
                 <h6 className="card-subtitle mb-2 text-muted">৳ 4999</h6>
                 <p className="card-text">
-                ASAP Health Care Service offers "Home-Centric Primary Care," where a doctor and physiotherapist visit patients weekly.
+                  ASAP Health Care Service offers "Home-Centric Primary Care," where a doctor and physiotherapist visit patients weekly.
                   <ul>
                     <li>Monthly 4 visits</li>
                     <li>1 MBBS Doctor & 1 Physiotherapist</li>

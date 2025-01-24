@@ -1,8 +1,8 @@
 import React from "react";
-import "./Homepage.css"; // Updated custom CSS
+import "./Homepage.css"; // Custom CSS
 import { Link } from "react-router-dom"; // React Router for navigation
 import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap CSS
-import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Bootstrap JS (optional)
+import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Bootstrap JS
 
 // Importing images
 import videoCalling from "./homepage/videoCalling.jpg";
@@ -10,6 +10,40 @@ import chamber from "./homepage/chamber.jpg";
 import doctorHome from "./homepage/doctor_home.jpg";
 import ambulance from "./homepage/ambulace.jpg";
 import bloodDonation from "./homepage/blood_donation.jpg";
+
+// Services array with unique paths
+const services = [
+  {
+    title: "Video Consultancy",
+    description: "Consult with the best doctors through video call.",
+    img: videoCalling,
+    path: "/", // Unique link for this service
+  },
+  {
+    title: "Chamber Appointment",
+    description: "Book your appointment easily with a few clicks.",
+    img: chamber,
+    path: "/", // Unique link for this service
+  },
+  {
+    title: "Doctor At Your Home",
+    description: "Book a doctor to visit you at home.",
+    img: doctorHome,
+    path: "/doctorhome", // Unique link for this service
+  },
+  {
+    title: "Ambulance Service",
+    description: "24/7 Emergency Ambulance Service.",
+    img: ambulance,
+    path: "/ambulanceservice", // Unique link for this service
+  },
+  {
+    title: "Blood Donation",
+    description: "Donate blood and save lives. Schedule your donation easily.",
+    img: bloodDonation,
+    path: "/", // Unique link for this service
+  },
+];
 
 const Homepage = () => {
   return (
@@ -34,7 +68,7 @@ const Homepage = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/doctorhome">
                   Find Doctor
                 </Link>
               </li>
@@ -44,7 +78,7 @@ const Homepage = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/">
+                <Link className="nav-link" to="/ambulanceservice">
                   Find Ambulance
                 </Link>
               </li>
@@ -79,33 +113,7 @@ const Homepage = () => {
       {/* Services Section */}
       <section className="container py-5">
         <div className="row g-4">
-          {[
-            {
-              title: "Video Consultancy",
-              description: "Consult with the best doctors through video call.",
-              img: videoCalling,
-            },
-            {
-              title: "Chamber Appointment",
-              description: "Book your appointment easily with a few clicks.",
-              img: chamber,
-            },
-            {
-              title: "Doctor At Your Home",
-              description: "Book a doctor to visit you at home.",
-              img: doctorHome,
-            },
-            {
-              title: "Ambulance Service",
-              description: "24/7 Emergency Ambulance Service.",
-              img: ambulance,
-            },
-            {
-              title: "Blood Donation",
-              description: "Donate blood and save lives. Schedule your donation easily.",
-              img: bloodDonation,
-            },
-          ].map((service, index) => (
+          {services.map((service, index) => (
             <div key={index} className="col-lg-4 col-md-6 col-sm-12">
               <div className="card shadow-sm h-100">
                 <img
@@ -116,7 +124,7 @@ const Homepage = () => {
                 <div className="card-body text-center">
                   <h5 className="card-title">{service.title}</h5>
                   <p className="card-text">{service.description}</p>
-                  <Link to="/" className="btn btn-outline-primary">
+                  <Link to={service.path} className="btn btn-outline-primary">
                     Learn More
                   </Link>
                 </div>
