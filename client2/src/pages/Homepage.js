@@ -23,7 +23,7 @@ const services = [
     title: "Chamber Appointment",
     description: "Book your appointment easily with a few clicks.",
     img: chamber,
-    path: "/", // Unique link for this service
+    path: "/chamberapp", // Unique link for this service
   },
   {
     title: "Doctor At Your Home",

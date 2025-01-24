@@ -1,0 +1,64 @@
+/* Navbar Styles */
+.navbar {
+  background-color: #222831;
+}
+
+.navbar-brand {
+  color: #eeeeee;
+  font-weight: bold;
+}
+
+.navbar .btn-outline-primary {
+  color: #00adb5;
+  border-color: #00adb5;
+}
+
+.navbar .btn-outline-primary:hover {
+  background-color: #00adb5;
+  color: #ffffff;
+}
+
+/* Hero Section */
+.chamber-appointment header {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.search-bar input {
+  border-radius: 20px;
+}
+
+.search-bar button {
+  border-radius: 20px;
+}
+
+/* Doctor Cards */
+.card {
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
+}
+
+.card img {
+  border-radius: 10px 10px 0 0;
+}
+
+.card-title {
+  color: #007bff;
+}
+
+.card .btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+/* Form Section */
+.form-section {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.form-section .btn-primary {
+  border-radius: 20px;
+}
