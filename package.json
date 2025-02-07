@@ -21,14 +21,16 @@
     "concurrently": "^9.1.2",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "formik": "^2.4.6",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.9",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4",
-    "webpack": "^5.97.1"
+    "webpack": "^5.97.1",
+    "yup": "^1.6.1"
   }
 }
