@@ -1,7 +1,7 @@
 import React from "react";
 import "./bloodRequest.css";
 
-const RequestList = ({ requests }) => {
+const RequestList = ({ requests = [] }) => {
   return (
     <div className="request-list p-3 shadow bg-white rounded">
       <h5 className="mb-3 text-danger fw-bold">Active Blood Requests</h5>

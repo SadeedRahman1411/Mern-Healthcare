@@ -4,10 +4,13 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Homepage from './pages/Homepage';
 import Login from './pages/Login';
 import Register from './pages/Register';
-//import DoctorAtHomePage from "./pages/DoctorHome";
+
 import DoctorHome from './pages/DoctorHome';
 import AmbulanceService from './pages/AmbulanceService';
 import ChamberAppointment from './pages/ChamberAppointment';
+import BloodRequestForm from './pages/BloodRequestForm';
+import BloodRequest from './pages/BloodRequest';
+import RequestList from './pages/RequestList';
 
 function App() {
   return (
@@ -20,6 +23,10 @@ function App() {
           <Route path="/doctorhome" element={<DoctorHome />} />
           <Route path="/ambulanceservice" element={<AmbulanceService />} />
           <Route path="/chamberapp" element={<ChamberAppointment />} />
+          <Route path="/reqList" element={<RequestList />} />
+          <Route path="/bloodreq" element={<BloodRequest />} />
+          <Route path="/bloodreqform" element={<BloodRequestForm />} />
+          
         </Routes>
       </BrowserRouter>
     </>

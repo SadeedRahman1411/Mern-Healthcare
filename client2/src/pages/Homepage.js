@@ -41,7 +41,7 @@ const services = [
     title: "Blood Donation",
     description: "Donate blood and save lives. Schedule your donation easily.",
     img: bloodDonation,
-    path: "/", // Unique link for this service
+    path: "/bloodreq", // Unique link for this service
   },
 ];
 

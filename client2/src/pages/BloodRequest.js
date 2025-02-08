@@ -1,20 +1,29 @@
-import React, { useState, useEffect } from "react";
-import BloodRequestForm from "./BloodRequestForm";
-import RequestList from "./RequestList";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./bloodRequest.css";
+import React, { useState } from "react";
+import "./bloodRequestForm.css";
 
-const BloodRequest = () => {
-  const [requests, setRequests] = useState([]);
+const BloodRequestForm = ({ refreshRequests }) => {
+  const [formData, setFormData] = useState({
+    bloodType: "",
+    address: "",
+    contact: "",
+  });
 
-  useEffect(() => {
-    fetchRequests();
-  }, []);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const fetchRequests = async () => {
-    const response = await fetch("http://localhost:5000/api/bloodRequests");
-    const data = await response.json();
-    setRequests(data);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:5000/api/bloodRequests", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      setFormData({ bloodType: "", address: "", contact: "" });
+      refreshRequests();
+    }
   };
 
   return (
@@ -41,10 +50,7 @@ const BloodRequest = () => {
                   <a className="nav-link text-white" href="/">Home</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="/donate">Donate Blood</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link text-white" href="/request">Request Blood</a>
+                  <a className="nav-link text-white" href="/bloodreqform">Donate Blood</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link text-white" href="/contact">Contact Us</a>
@@ -55,20 +61,58 @@ const BloodRequest = () => {
         </nav>
       </div>
 
-      {/* Page Content */}
+      {/* Form */}
       <div className="container mt-4">
-        <h2 className="text-center text-danger fw-bold mb-4">Blood Donation Requests</h2>
-        <div className="row">
-          <div className="col-lg-6 mb-4">
-            <BloodRequestForm refreshRequests={fetchRequests} />
+        <form className="blood-request-form p-3 shadow bg-white rounded" onSubmit={handleSubmit}>
+          <h5 className="mb-3 text-danger fw-bold">Request Form</h5>
+          <div className="mb-2">
+            <select
+              className="form-control"
+              name="bloodType"
+              value={formData.bloodType}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Blood Type</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+            </select>
           </div>
-          <div className="col-lg-6">
-            <RequestList requests={requests} />
+          <div className="mb-2">
+            <input
+              type="text"
+              className="form-control"
+              name="address"
+              placeholder="Address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
           </div>
-        </div>
+          <div className="mb-2">
+            <input
+              type="tel"
+              className="form-control"
+              name="contact"
+              placeholder="Contact Number"
+              value={formData.contact}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-danger w-100">
+            Submit Request
+          </button>
+        </form>
       </div>
     </>
   );
 };
 
-export default BloodRequest;
+export default BloodRequestForm;
