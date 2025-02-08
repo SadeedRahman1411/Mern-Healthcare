@@ -51,10 +51,10 @@ const BloodRequestForm = ({ refreshRequests }) => {
         <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
           <div className="container">
             <a className="navbar-brand fw-bold fs-4" href="/">ASAP Health Care Service</a>
-            <button 
-              className="navbar-toggler" 
-              type="button" 
-              data-bs-toggle="collapse" 
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
               data-bs-target="#navbarNav"
               aria-controls="navbarNav"
               aria-expanded="false"
@@ -83,7 +83,8 @@ const BloodRequestForm = ({ refreshRequests }) => {
       <div className="container mt-4">
         <form className="blood-request-form p-4 shadow bg-white rounded" onSubmit={handleSubmit}>
           <h5 className="mb-3 text-danger fw-bold text-center">Blood Request Form</h5>
-
+          
+          {/* Blood Type */}
           <div className="mb-3">
             <select
               className="form-control"
@@ -104,6 +105,7 @@ const BloodRequestForm = ({ refreshRequests }) => {
             </select>
           </div>
 
+          {/* Address */}
           <div className="mb-3">
             <input
               type="text"
@@ -116,6 +118,7 @@ const BloodRequestForm = ({ refreshRequests }) => {
             />
           </div>
 
+          {/* Contact Number */}
           <div className="mb-3">
             <input
               type="tel"
@@ -129,6 +132,7 @@ const BloodRequestForm = ({ refreshRequests }) => {
             {error && <div className="text-danger mt-1">{error}</div>}
           </div>
 
+          {/* Buttons */}
           <div className="button-group d-flex justify-content-between">
             <button type="submit" className="btn btn-danger" disabled={error}>
               Submit Request
