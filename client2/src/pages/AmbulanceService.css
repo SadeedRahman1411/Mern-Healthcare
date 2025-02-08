@@ -1,88 +1,156 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap');
+
+/* General Styles */
 /* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f1f3f5; 
-    color: #222831; 
-  }
-  
-  /* Header Section */
-  header {
-    text-align: center;
-    padding: 50px 20px;
-    background-color: #f1f3f5; 
-    color: #eeeeee; 
-  }
-  
+  font-family: 'Poppins', 'Arial', sans-serif; /* Modern and clean font */
+  margin: 0;
+  padding: 0;
+  background-color: #f1f3f5;
+  color: #222831;
+}
+
+/* Header Section */
+header {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f1f3f5;
+  color: #eeeeee;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #222831;
+  font-family: 'Montserrat', 'Arial', sans-serif; /* Bold and elegant font for headings */
+  font-weight: 700; /* Bold weight for emphasis */
+}
+
+header p {
+  font-size: 1.25rem;
+  color: #6c757d; /* Adjusted for better readability */
+  font-family: 'Poppins', 'Arial', sans-serif; /* Consistent body font */
+}
+
+/* Cards Section */
+.card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: #222831;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  font-weight: bold;
+  color: #00adb5;
+  font-family: 'Montserrat', 'Arial', sans-serif; /* Consistent heading font */
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #6c757d;
+  font-family: 'Poppins', 'Arial', sans-serif; /* Consistent body font */
+}
+
+/* Form Section */
+.form-section {
+  background-color: #f1f3f5;
+  padding: 40px 20px;
+  color: #222831;
+}
+
+.form-section h2 {
+  font-weight: bold;
+  color: #00adb5;
+  font-family: 'Montserrat', 'Arial', sans-serif; /* Consistent heading font */
+}
+
+.form-section label {
+  font-size: 1rem;
+  color: #6c757d;
+  font-family: 'Poppins', 'Arial', sans-serif; /* Consistent body font */
+}
+
+.form-section input,
+.form-section select,
+.form-section button {
+  border-radius: 25px;
+  padding: 12px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #222831;
+  font-family: 'Poppins', 'Arial', sans-serif; /* Consistent body font */
+}
+
+.form-section input:focus,
+.form-section select:focus {
+  border-color: #00adb5;
+  box-shadow: 0 0 5px rgba(0, 173, 181, 0.5);
+}
+
+.form-section button {
+  background-color: #00adb5;
+  color: #eeeeee;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.form-section button:hover {
+  background-color: #007bff;
+  transform: scale(1.05);
+}
+
+/* Validation Error Styles */
+.is-invalid {
+  border-color: #dc3545 !important; /* Red border for invalid fields */
+}
+
+.invalid-feedback {
+  color: #dc3545; /* Red text for error messages */
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Contact Number Input */
+#contactNumber {
+  /* Ensure the input field only accepts numbers */
+  -moz-appearance: textfield; /* Firefox */
+}
+
+#contactNumber::-webkit-outer-spin-button,
+#contactNumber::-webkit-inner-spin-button {
+  -webkit-appearance: none; /* Hide number input arrows in WebKit browsers */
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   header h1 {
-    font-size: 2.5rem;
-    color :#222831;
+    font-size: 2rem;
   }
-  
+
   header p {
-    font-size: 1.25rem;
-    color: #ffffff; 
+    font-size: 1rem;
   }
-  
-  /* Cards Section */
-  .card {
-    border: none;
-    border-radius: 15px; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    color: #222831; 
-  }
-  
-  .card:hover {
-    transform: translateY(-10px); 
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  }
-  
+
   .card-title {
-    font-weight: bold;
-    color: #00adb5; 
+    font-size: 1.25rem;
   }
-  
+
   .card-text {
-    font-size: 1rem;
-    color: #6c757d; 
+    font-size: 0.875rem;
   }
-  
-  .form-section {
-    background-color: #f1f3f5; 
-    padding: 40px 20px;
-    color: #222831; 
-  }
-  
-  .form-section h2 {
-    font-weight: bold;
-    color: #00adb5; 
-  }
-  
-  .form-section label {
-    font-size: 1rem;
-    color: #6c757d; 
-  }
-  
+
   .form-section input,
+  .form-section select,
   .form-section button {
-    border-radius: 25px; 
-    padding: 12px;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    color: #222831; 
+    padding: 10px;
+    font-size: 0.875rem;
   }
-  
-  .form-section button {
-    background-color: #00adb5; 
-    color: #eeeeee; 
-    border: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .form-section button:hover {
-    background-color: #007bff; 
-    transform: scale(1.05);
-  }
-  
+}
