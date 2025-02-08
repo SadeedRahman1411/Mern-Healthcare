@@ -8,12 +8,30 @@ const BloodRequestForm = ({ refreshRequests }) => {
     contact: "",
   });
 
+  const [error, setError] = useState(""); // State for contact number validation error
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    if (e.target.name === "contact") {
+      validateContact(e.target.value);
+    }
+  };
+
+  // Contact number validation: Must start with '01' and be exactly 11 digits
+  const validateContact = (contact) => {
+    const contactPattern = /^01\d{9}$/; // Starts with '01' and has exactly 11 digits
+    if (!contactPattern.test(contact)) {
+      setError("Contact number must be 11 digits and start with '01'.");
+    } else {
+      setError("");
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (error) return; // Prevent form submission if there's a validation error
+
     const response = await fetch("http://localhost:5000/api/bloodRequests", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -63,9 +81,10 @@ const BloodRequestForm = ({ refreshRequests }) => {
 
       {/* Form */}
       <div className="container mt-4">
-        <form className="blood-request-form p-3 shadow bg-white rounded" onSubmit={handleSubmit}>
-          <h5 className="mb-3 text-danger fw-bold">Request Form</h5>
-          <div className="mb-2">
+        <form className="blood-request-form p-4 shadow bg-white rounded" onSubmit={handleSubmit}>
+          <h5 className="mb-3 text-danger fw-bold text-center">Blood Request Form</h5>
+
+          <div className="mb-3">
             <select
               className="form-control"
               name="bloodType"
@@ -84,31 +103,40 @@ const BloodRequestForm = ({ refreshRequests }) => {
               <option value="AB-">AB-</option>
             </select>
           </div>
-          <div className="mb-2">
+
+          <div className="mb-3">
             <input
               type="text"
               className="form-control"
               name="address"
-              placeholder="Address"
+              placeholder="Enter Address"
               value={formData.address}
               onChange={handleChange}
               required
             />
           </div>
-          <div className="mb-2">
+
+          <div className="mb-3">
             <input
               type="tel"
-              className="form-control"
+              className={`form-control ${error ? "is-invalid" : ""}`}
               name="contact"
-              placeholder="Contact Number"
+              placeholder="Enter Contact Number"
               value={formData.contact}
               onChange={handleChange}
               required
             />
+            {error && <div className="text-danger mt-1">{error}</div>}
           </div>
-          <button type="submit" className="btn btn-danger w-100">
-            Submit Request
-          </button>
+
+          <div className="button-group d-flex justify-content-between">
+            <button type="submit" className="btn btn-danger" disabled={error}>
+              Submit Request
+            </button>
+            <button type="button" className="btn btn-outline-secondary" onClick={() => window.location.href = "/learn-more"}>
+              Learn More
+            </button>
+          </div>
         </form>
       </div>
     </>
