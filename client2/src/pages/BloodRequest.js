@@ -33,10 +33,10 @@ const BloodRequestForm = ({ refreshRequests }) => {
         <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
           <div className="container">
             <a className="navbar-brand fw-bold fs-4" href="/">ASAP Health Care Service</a>
-            <button 
-              className="navbar-toggler" 
-              type="button" 
-              data-bs-toggle="collapse" 
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
               data-bs-target="#navbarNav"
               aria-controls="navbarNav"
               aria-expanded="false"
@@ -63,9 +63,9 @@ const BloodRequestForm = ({ refreshRequests }) => {
 
       {/* Form */}
       <div className="container mt-4">
-        <form className="blood-request-form p-3 shadow bg-white rounded" onSubmit={handleSubmit}>
-          <h5 className="mb-3 text-danger fw-bold">Request Form</h5>
-          <div className="mb-2">
+        <form className="blood-request-form p-4 shadow bg-white rounded" onSubmit={handleSubmit}>
+          <h5 className="mb-3 text-danger fw-bold text-center">Blood Request Form</h5>
+          <div className="mb-3">
             <select
               className="form-control"
               name="bloodType"
@@ -84,31 +84,36 @@ const BloodRequestForm = ({ refreshRequests }) => {
               <option value="AB-">AB-</option>
             </select>
           </div>
-          <div className="mb-2">
+          <div className="mb-3">
             <input
               type="text"
               className="form-control"
               name="address"
-              placeholder="Address"
+              placeholder="Enter Address"
               value={formData.address}
               onChange={handleChange}
               required
             />
           </div>
-          <div className="mb-2">
+          <div className="mb-3">
             <input
               type="tel"
               className="form-control"
               name="contact"
-              placeholder="Contact Number"
+              placeholder="Enter Contact Number"
               value={formData.contact}
               onChange={handleChange}
               required
             />
           </div>
-          <button type="submit" className="btn btn-danger w-100">
-            Submit Request
-          </button>
+          <div className="button-group d-flex justify-content-between">
+            <button type="submit" className="btn btn-danger">
+              Submit Request
+            </button>
+            <button type="button" className="btn btn-outline-secondary" onClick={() => window.location.href = "/learn-more"}>
+              Learn More
+            </button>
+          </div>
         </form>
       </div>
     </>

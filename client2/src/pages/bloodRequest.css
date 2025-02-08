@@ -1,35 +1,138 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 /* General Styling */
 body {
-    font-family: "Arial", sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
-  }
-  
-  /* Container Styling */
-  .blood-request-container {
-    background: #fff;
-    padding: 20px;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Container Styling */
+.blood-request-form {
+    max-width: 55%;
+    margin: 0 auto;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Navbar Styling */
-  .navbar {
+}
+
+/* Form Styling */
+.blood-request-form input,
+.blood-request-form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Button Styling */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.blood-request-form .btn {
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.3s ease-in-out;
+    border-radius: 5px;
+    width: 48%;
+}
+
+.blood-request-form .btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.blood-request-form .btn-danger:hover {
+    background-color: #c82333;
+}
+
+.blood-request-form .btn-outline-secondary {
+    background-color: transparent;
+    color: #6c757d;
+    border: 1px solid #6c757d;
+}
+
+.blood-request-form .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Navbar Styling */
+.navbar {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .navbar-nav .nav-link {
+    padding: 10px 20px;
+}
+
+.navbar-nav .nav-link {
     font-size: 16px;
     transition: 0.3s ease-in-out;
-  }
-  
-  .navbar-nav .nav-link:hover {
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
     color: #ffc107 !important;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .blood-request-container {
-      padding: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .blood-request-form {
+        max-width: 80%;
+        padding: 20px;
     }
-  }
-  
+
+    body {
+        font-size: 14px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 14px;
+    }
+
+    .blood-request-form input,
+    .blood-request-form select {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .blood-request-form .btn {
+        width: 48%;
+        font-size: 13px;
+        padding: 6px 15px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .blood-request-form {
+        max-width: 65%;
+    }
+
+    body {
+        font-size: 16px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .blood-request-form {
+        max-width: 50%;
+    }
+
+    body {
+        font-size: 18px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px;
+    }
+}
