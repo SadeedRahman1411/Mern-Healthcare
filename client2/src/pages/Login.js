@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
-import './Login.css'; // Import the CSS file
+import './Login.css';
 
 const onFinish = (values) => {
   console.log('Success:', values);
@@ -13,22 +13,17 @@ const onFinishFailed = (errorInfo) => {
 
 const Login = () => (
   <div>
-    {/* Navigation Bar */}
     <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container">
-        {/* ASAP Health Care Service */}
         <Link className="navbar-brand" to="/">
           ASAP Health Care Service
         </Link>
       </div>
     </nav>
 
-    {/* Main Content */}
     <div className="login-container">
-      {/* Login Heading */}
       <h1 className="login-heading">Login</h1>
 
-      {/* Login Form */}
       <Form
         name="basic"
         className="login-form"
@@ -42,12 +37,10 @@ const Login = () => (
         <Form.Item
           label="Username"
           name="username"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your username!',
-            },
-          ]}
+          rules={[{
+            required: true,
+            message: 'Please input your username!',
+          }]}
         >
           <Input />
         </Form.Item>
@@ -55,12 +48,10 @@ const Login = () => (
         <Form.Item
           label="Password"
           name="password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!',
-            },
-          ]}
+          rules={[{
+            required: true,
+            message: 'Please input your password!',
+          }]}
         >
           <Input.Password />
         </Form.Item>
@@ -80,7 +71,6 @@ const Login = () => (
         </Form.Item>
       </Form>
 
-      {/* Link to Register Page */}
       <div className="register-link">
         Don't have an account?{' '}
         <Link to="/register" className="register-link-text">
