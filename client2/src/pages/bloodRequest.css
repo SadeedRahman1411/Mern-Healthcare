@@ -67,6 +67,7 @@ body {
 
 /* Navbar Styling */
 .navbar {
+    background-color: #dc3545; /* Same as btn-danger */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     padding: 10px 20px;
 }
@@ -75,10 +76,21 @@ body {
     font-size: 16px;
     transition: 0.3s ease-in-out;
     font-weight: 500;
+    color: white !important; /* Ensure text is white */
 }
 
 .navbar-nav .nav-link:hover {
-    color: #ffc107 !important;
+    color: #ffc107 !important; /* Yellow hover effect */
+}
+
+/* Footer Styling */
+footer {
+    background-color: #f30f26; /* Same as navbar */
+    color: white; /* Text color */
+    text-align: center;
+    padding: 15px 0;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.1); /* Shadow to match navbar */
+    margin-top: 30px; /* Add some space above the footer */
 }
 
 /* Responsive Design */

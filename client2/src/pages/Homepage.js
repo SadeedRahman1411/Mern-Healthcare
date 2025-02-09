@@ -67,14 +67,19 @@ const Homepage = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
+             <li className="nav-item">
+                <Link className="nav-link" to="/faq">
+                  FAQ
+                </Link>
+              </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/doctorhome">
                   Find Doctor
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/">
-                  Find Hospital
+                <Link className="nav-link" to="/contactus">
+                  Contact Us
                 </Link>
               </li>
               <li className="nav-item">
@@ -133,6 +138,14 @@ const Homepage = () => {
           ))}
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-dark text-white text-center py-3 mt-4">
+        <p className="mb-0">&copy; 2025 ASAP Health Care Service. All Rights Reserved.</p>
+        <p className="mb-0">
+          We are on a mission to make quality healthcare affordable and accessible for the people of Bangladesh.
+        </p>
+      </footer>
     </div>
   );
 };

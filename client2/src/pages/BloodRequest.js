@@ -56,7 +56,7 @@ const BloodRequestForm = ({ refreshRequests }) => {
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
+              aria-controls="#navbarNav"
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
@@ -77,6 +77,22 @@ const BloodRequestForm = ({ refreshRequests }) => {
             </div>
           </div>
         </nav>
+      </div>
+
+      {/* Blood Request Message */}
+      <div className="container mt-4">
+        <div className="blood-request-message p-3 bg-light">
+          <h4 className="text-danger fw-bold">BLOOD REQUEST</h4>
+          <p>
+            If you or someone you love is in urgent need of blood, we are here for you. 
+            Our team is dedicated to connecting you with life-saving donors as quickly as possible. 
+            Keep your trust in us, and contact us immediately for emergency blood support.
+          </p>
+          <p>
+            Your request is our priority. We understand the urgency and are committed to making a difference. 
+            Reach out to us now and let us help you in this crucial moment.
+          </p>
+        </div>
       </div>
 
       {/* Form */}
@@ -143,6 +159,13 @@ const BloodRequestForm = ({ refreshRequests }) => {
           </div>
         </form>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-danger text-white text-center py-3 mt-4">
+  <p className="mb-0">&copy; 2025 ASAP Health Care Service. All Rights Reserved.</p>
+  <p className="mb-0">We are on a mission to make quality healthcare affordable and accessible for the people of Bangladesh.</p>
+</footer>
+
     </>
   );
 };

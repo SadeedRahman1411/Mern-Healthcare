@@ -36,6 +36,10 @@ function DoctorHome() {
 
       {/* Main Content */}
       <div className="container mt-4">
+        {/* Heading */}
+        <h2 className="text-center mb-4">Choose a package that suits your need</h2>
+
+        {/* Cards */}
         <div className="row">
           {/* Card 1 */}
           <div className="col-md-6 mb-4">
@@ -80,7 +84,17 @@ function DoctorHome() {
           </div>
         </div>
       </div>
+      {/* Footer */}
+<footer className="bg-dark text-white text-center py-3 mt-4">
+  <p className="mb-0">&copy; 2025 ASAP Health Care Service. All Rights Reserved.</p>
+  <p className="mb-0">
+    We are on a mission to make quality healthcare affordable and accessible for the people of Bangladesh.
+  </p>
+</footer>
+
     </div>
+
+    
   );
 }
 

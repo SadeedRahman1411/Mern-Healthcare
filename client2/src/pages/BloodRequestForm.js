@@ -54,10 +54,27 @@ const BloodRequestForm = ({ refreshRequests }) => {
         </div>
       </nav>
 
+           {/* Blood Donation Message */}
+           <div className="container mt-4">
+        <div className="blood-donation-message p-3 bg-light">
+          <h4 className="text-danger fw-bold">BLOOD DONOR</h4>
+          <p>
+            Across Bangladesh, every day there remains an urgent need for all types of blood groups. 
+            Especially donors with rare blood groups such as O Negative, B Negative, and A Negative are in high demand. 
+            Your timely response is essential to the supply of healthy blood for the massive daily demand we face.
+          </p>
+          <p>
+            Your donation can save the lives of many, make a difference or simply make you feel great about your 
+            contribution to humanity. Whatever your reason, whatever your motivation, we welcome you to learn 
+            more about eligibility and the benefits of donating blood with a trusted organization like us.
+          </p>
+        </div>
+      </div>
+
       {/* Form */}
       <div className="container mt-4">
         <form className="blood-request-form p-3 shadow bg-white rounded" onSubmit={handleSubmit}>
-          <h5 className="mb-3 text-danger fw-bold text-center">Blood Donor Form</h5>
+          <h5 className="mb-3 text-danger fw-bold text-center">Blood Donate Form</h5>
 
           <div className="mb-2">
             <input
@@ -121,6 +138,12 @@ const BloodRequestForm = ({ refreshRequests }) => {
           </button>
         </form>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-danger text-white text-center py-3 mt-4">
+        <p className="mb-0">&copy; 2025 ASAP Health Care Service. All Rights Reserved.</p>
+        <p className="mb-0">We are on a mission to make quality healthcare affordable and accessible for the people of Bangladesh.</p>
+      </footer>
     </>
   );
 };

@@ -11,6 +11,9 @@ import ChamberAppointment from './pages/ChamberAppointment';
 import BloodRequestForm from './pages/BloodRequestForm';
 import BloodRequest from './pages/BloodRequest';
 import RequestList from './pages/RequestList';
+import ContactUs from './pages/ContactUs';
+import FAQ from './pages/FAQ';
+
 
 function App() {
   return (
@@ -26,7 +29,9 @@ function App() {
           <Route path="/reqList" element={<RequestList />} />
           <Route path="/bloodreq" element={<BloodRequest />} />
           <Route path="/bloodreqform" element={<BloodRequestForm />} />
-          
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/faq" element={<FAQ />} />
+        
         </Routes>
       </BrowserRouter>
     </>

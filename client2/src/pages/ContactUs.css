@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;500&display=swap");
+
+.contactus {
+  font-family: "Roboto", sans-serif;
+  color: #333;
+}
+
+/* Simplified Navigation Bar */
+.navbar {
+  background-color: #222831;
+  padding: 1rem 0;
+}
+
+.navbar .navbar-brand {
+  color: #eeeeee;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.navbar .btn-outline-primary {
+  color: #00adb5;
+  border-color: #00adb5;
+}
+
+.navbar .btn-outline-primary:hover {
+  background-color: #00adb5;
+  color: white;
+}
+
+/* Developer Cards */
+.card {
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  border-radius: 15px 15px 0 0;
+  height: 250px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #222831;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .card-img-top {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-img-top {
+    height: 180px;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+  }
+}

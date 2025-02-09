@@ -144,6 +144,14 @@ const ChamberAppointment = () => {
           </button>
         </form>
       </section>
+      {/* Footer */}
+<footer className="bg-dark text-white text-center py-3 mt-4">
+  <p className="mb-0">&copy; 2025 ASAP Health Care Service. All Rights Reserved.</p>
+  <p className="mb-0">
+    We are on a mission to make quality healthcare affordable and accessible for the people of Bangladesh.
+  </p>
+</footer>
+
     </div>
   );
 };
