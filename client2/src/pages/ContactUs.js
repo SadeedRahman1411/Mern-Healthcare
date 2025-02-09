@@ -15,7 +15,7 @@ const developers = [
     img: dev1,
   },
   {
-    name: "Sayem (Monkey) Pias",
+    name: "Sayem Pias",
     email: "sayem.cse.20220204100@aust.edu",
     studentId: "20220204100",
     img: dev2,
