@@ -1,84 +1,88 @@
-import React from 'react';
-import { Button, Checkbox, Form, Input } from 'antd';
-import { Link } from 'react-router-dom';
-import './Login.css';
+import React, { useState } from "react";
+import "./Login.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useDispatch } from "react-redux";
+import { showLoading, hideLoading } from "../redux/features/alertSlice";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const onFinish = (values) => {
-  console.log('Success:', values);
-};
+const Login = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
-const onFinishFailed = (errorInfo) => {
-  console.log('Failed:', errorInfo);
-};
+  const onFinishHandler = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch(showLoading());
+      const res = await axios.post("/api/v1/user/login", { email, password });
+      dispatch(hideLoading());
+      if (res.data.success) {
+        localStorage.setItem("token", res.data.token);
+        alert("Login Successfully");
+        navigate("/");
+      } else {
+        alert(res.data.message);
+      }
+    } catch (error) {
+      dispatch(hideLoading());
+      console.log(error);
+      alert("Something went wrong");
+    }
+  };
 
-const Login = () => (
-  <div>
-    <nav className="navbar navbar-expand-lg navbar-dark">
-      <div className="container">
-        <Link className="navbar-brand" to="/">
-          ASAP Health Care Service
-        </Link>
-      </div>
-    </nav>
+  return (
+    <div>
+      {/* Navigation Bar */}
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
+            ASAP Health Care Service
+          </Link>
+        </div>
+      </nav>
 
-    <div className="login-container">
-      <h1 className="login-heading">Login</h1>
-
-      <Form
-        name="basic"
-        className="login-form"
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[{
-            required: true,
-            message: 'Please input your username!',
-          }]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{
-            required: true,
-            message: 'Please input your password!',
-          }]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item
-          name="remember"
-          valuePropName="checked"
-          className="login-remember"
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-
-        <Form.Item className="login-submit">
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
-
-      <div className="register-link">
-        Don't have an account?{' '}
-        <Link to="/register" className="register-link-text">
-          Register
-        </Link>
+      {/* Login Form */}
+      <div className="login-container">
+        <div className="login-form">
+          <h3 className="login-heading">Login Form</h3>
+          <form onSubmit={onFinishHandler}>
+            <div className="mb-3">
+              <label className="form-label">Email</label>
+              <input
+                type="email"
+                className="form-control"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Password</label>
+              <input
+                type="password"
+                className="form-control"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="login-remember">
+              <input type="checkbox" id="remember" />
+              <label htmlFor="remember" className="ms-2">Remember me</label>
+            </div>
+            <div className="login-submit">
+              <button type="submit" className="btn">Login</button>
+            </div>
+            <div className="register-link">
+              <Link to="/register" className="register-link-text">Not a user? Register here</Link>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Login;

@@ -1,36 +1,32 @@
 {
-  "name": "doc-appointment",
+  "name": "Doc-Appoinment-system",
   "version": "1.0.0",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon serevr.js",
+    "client2": "npm start --prefix ./client2 ",
+    "dev": "concurrently \"npm run server\" \"npm run client2\""
   },
   "keywords": [],
-  "author": "ASAP",
+  "author": "ASAP ",
   "license": "Syntax_ASAP",
-  "description": "",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.2.1",
+    "antd": "^5.24.0",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
     "colors": "^1.4.0",
-    "concurrently": "^9.1.2",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "formik": "^2.4.6",
+    "concurrently": "^7.6.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.9.5",
+    "mongoose": "^6.7.2",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.9",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-scripts": "^5.0.1",
-    "web-vitals": "^2.1.4",
-    "webpack": "^5.97.1",
-    "yup": "^1.6.1"
+    "web-vitals": "^4.2.4"
   }
 }

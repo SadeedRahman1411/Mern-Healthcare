@@ -14,11 +14,16 @@ import RequestList from './pages/RequestList';
 import ContactUs from './pages/ContactUs';
 import FAQ from './pages/FAQ';
 
+import { useSelector } from "react-redux";
+import Spinner from './components/Spinner';
+
 
 function App() {
+  const { loading } = useSelector((state) => state.alerts);
   return (
     <>
       <BrowserRouter>
+      {loading && <Spinner />}
         <Routes>
           <Route path='/' element={<Homepage />} />//home pg path set
           <Route path='/login' element={<Login />} />//login page path set
