@@ -19,7 +19,12 @@ const Login = () => {
       const res = await axios.post("/api/v1/user/login", { email, password });
       dispatch(hideLoading());
       if (res.data.success) {
-        localStorage.setItem("token", res.data.token);
+        const rememberMe = document.getElementById("remember").checked;
+        if (rememberMe) {
+          localStorage.setItem("token", res.data.token); // Persist after restart
+        } else {
+          sessionStorage.setItem("token", res.data.token); // Clear on restart
+        }
         alert("Login Successfully");
         navigate("/");
       } else {

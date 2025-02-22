@@ -1,6 +1,5 @@
-import React from "react";
-import "./Homepage.css"; // Custom CSS
-import { Link } from "react-router-dom"; // React Router for navigation
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom"; // Added useNavigate
 import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap CSS
 import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Bootstrap JS
 
@@ -46,6 +45,28 @@ const services = [
 ];
 
 const Homepage = () => {
+  const navigate = useNavigate(); // Added navigate hook
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
+  const token = localStorage.getItem("token") || sessionStorage.getItem("token"); // Check if the user is logged in
+
+  useEffect(() => {
+    if (token) {
+      setIsLoggedIn(true); // Set login state to true if token exists
+    }
+  }, [token]);
+
+  // Handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token"); // In case the token is stored in sessionStorage
+    setIsLoggedIn(false); // Set login state to false after logout
+  };
+
+  // Handle Sign In button click (Redirect to login page)
+  const handleSignIn = () => {
+    navigate("/login");
+  };
+
   return (
     <div className="homepage">
       {/* Navigation Bar */}
@@ -67,7 +88,7 @@ const Homepage = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
-             <li className="nav-item">
+              <li className="nav-item">
                 <Link className="nav-link" to="/faq">
                   FAQ
                 </Link>
@@ -87,11 +108,29 @@ const Homepage = () => {
                   Find Ambulance
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="btn btn-outline-primary ms-2" to="/login">
-                  Sign In
-                </Link>
-              </li>
+
+              {/* Conditionally render Sign In or Logout */}
+              {!isLoggedIn ? (
+                <li className="nav-item">
+                  <button
+                    className="btn btn-outline-primary ms-2"
+                    onClick={handleSignIn}
+                    disabled={isLoggedIn} // Disable Sign In button when logged in
+                  >
+                    Sign In
+                  </button>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <button
+                    className="btn btn-outline-danger ms-2"
+                    onClick={handleLogout}
+                    disabled={!isLoggedIn} // Disable Logout button when not logged in
+                  >
+                    Logout
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         </div>

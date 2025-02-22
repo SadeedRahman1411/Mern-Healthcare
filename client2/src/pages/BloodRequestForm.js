@@ -54,18 +54,18 @@ const BloodRequestForm = ({ refreshRequests }) => {
         </div>
       </nav>
 
-           {/* Blood Donation Message */}
-           <div className="container mt-4">
+      {/* Blood Donation Message */}
+      <div className="container mt-4">
         <div className="blood-donation-message p-3 bg-light">
           <h4 className="text-danger fw-bold">BLOOD DONOR</h4>
           <p>
-            Across Bangladesh, every day there remains an urgent need for all types of blood groups. 
-            Especially donors with rare blood groups such as O Negative, B Negative, and A Negative are in high demand. 
+            Across Bangladesh, every day there remains an urgent need for all types of blood groups.
+            Especially donors with rare blood groups such as O Negative, B Negative, and A Negative are in high demand.
             Your timely response is essential to the supply of healthy blood for the massive daily demand we face.
           </p>
           <p>
-            Your donation can save the lives of many, make a difference or simply make you feel great about your 
-            contribution to humanity. Whatever your reason, whatever your motivation, we welcome you to learn 
+            Your donation can save the lives of many, make a difference or simply make you feel great about your
+            contribution to humanity. Whatever your reason, whatever your motivation, we welcome you to learn
             more about eligibility and the benefits of donating blood with a trusted organization like us.
           </p>
         </div>

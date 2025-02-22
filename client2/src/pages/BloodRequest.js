@@ -84,12 +84,12 @@ const BloodRequestForm = ({ refreshRequests }) => {
         <div className="blood-request-message p-3 bg-light">
           <h4 className="text-danger fw-bold">BLOOD REQUEST</h4>
           <p>
-            If you or someone you love is in urgent need of blood, we are here for you. 
-            Our team is dedicated to connecting you with life-saving donors as quickly as possible. 
+            If you or someone you love is in urgent need of blood, we are here for you.
+            Our team is dedicated to connecting you with life-saving donors as quickly as possible.
             Keep your trust in us, and contact us immediately for emergency blood support.
           </p>
           <p>
-            Your request is our priority. We understand the urgency and are committed to making a difference. 
+            Your request is our priority. We understand the urgency and are committed to making a difference.
             Reach out to us now and let us help you in this crucial moment.
           </p>
         </div>
@@ -99,7 +99,7 @@ const BloodRequestForm = ({ refreshRequests }) => {
       <div className="container mt-4">
         <form className="blood-request-form p-4 shadow bg-white rounded" onSubmit={handleSubmit}>
           <h5 className="mb-3 text-danger fw-bold text-center">Blood Request Form</h5>
-          
+
           {/* Blood Type */}
           <div className="mb-3">
             <select
@@ -162,12 +162,13 @@ const BloodRequestForm = ({ refreshRequests }) => {
 
       {/* Footer */}
       <footer className="bg-danger text-white text-center py-3 mt-4">
-  <p className="mb-0">&copy; 2025 ASAP Health Care Service. All Rights Reserved.</p>
-  <p className="mb-0">We are on a mission to make quality healthcare affordable and accessible for the people of Bangladesh.</p>
-</footer>
+        <p className="mb-0">&copy; 2025 ASAP Health Care Service. All Rights Reserved.</p>
+        <p className="mb-0">We are on a mission to make quality healthcare affordable and accessible for the people of Bangladesh.</p>
+      </footer>
 
     </>
   );
 };
 
 export default BloodRequestForm;
+
