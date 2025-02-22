@@ -1,16 +1,9 @@
+// userRoutes.js (Removed authMiddleware from register route)
 const express = require("express");
-const {
-  loginController,
-  registerController,
-} = require("../controllers/userCtrl");
+const { registerController, loginController } = require("../controllers/userCtrl");
 
-//router onject
 const router = express.Router();
-
-//routes
-//LOGIN || POST
+router.post("/register", registerController);
 router.post("/login", loginController);
 
-//REGISTER || POST
-router.post("/register", registerController);
 module.exports = router;
