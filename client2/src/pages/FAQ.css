@@ -1,36 +1,78 @@
-/* FAQ Container */
-.faq-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+/* FAQ.css */
+.faq-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar styling to match homepage */
+.navbar {
+  background-color: #343a40;
+  margin-bottom: 2rem;
+}
+
+.navbar-brand {
+  color: #fff;
+  font-weight: 500;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.faq-item {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.faq-question {
+  background: none;
+  border: none;
+  padding: 1rem 0;
+  width: 100%;
+  text-align: left;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.faq-question:hover {
+  color: #0d6efd;
+}
+
+.plus-icon {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.faq-answer {
+  padding: 0 0 1rem 0;
+  color: #666;
+}
+
+/* Make the layout responsive */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
   }
   
-  /* Accordion Styling */
-  .accordion-button {
-    font-size: 18px;
-    font-weight: 500;
-    color: #333;
-    background-color: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    transition: background-color 0.3s ease;
+  .col-md-6 {
+    width: 100%;
   }
   
-  .accordion-button:not(.collapsed) {
-    background-color: #e9ecef;
-    color: #333;
-    border-bottom: 1px solid #ddd;
+  .col-md-6:first-child {
+    margin-bottom: 2rem;
   }
-  
-  .accordion-button:focus {
-    box-shadow: none;
-  }
-  
-  .accordion-body {
-    padding: 15px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-top: none;
-    border-radius: 0 0 5px 5px;
-  }
+}
+
+/* Footer styling to match homepage */
+.footerFAQ {
+  margin-top: auto;
+  background-color: #222831 !important; /* Red color from Bootstrap's danger class */
+}
+
+.footerFAQ p {
+  margin-bottom: 0;
+  color: white;
+}

@@ -14,6 +14,7 @@
   "author": "ASAP ",
   "license": "Syntax_ASAP",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.5.1",
     "antd": "^5.24.0",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
@@ -28,6 +29,7 @@
     "nodemon": "^3.1.9",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-redux": "^9.2.0",
     "react-toastify": "^11.0.3",
     "web-vitals": "^4.2.4"
   }
