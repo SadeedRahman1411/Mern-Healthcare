@@ -25,7 +25,7 @@ const Register = () => {
         alert("Registered Successfully!");
         navigate("/login");
       } else {
-        alert(res.data.message);
+        alert(res.data.message); // ✅ Show correct error message (e.g., "Invalid email")
       }
     } catch (error) {
       dispatch(hideLoading());

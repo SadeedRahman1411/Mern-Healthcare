@@ -6,7 +6,7 @@ const validateEmail = require("../utils/validateEmail");
 
 const registerController = async (req, res) => {
   try {
-    const { name, email, password, userType } = req.body; // Changed role to userType
+    const { name, email, password, userType } = req.body;
     console.log("📩 Received registration request:", req.body);
 
     if (!name || !email || !password || !userType) {
@@ -18,7 +18,7 @@ const registerController = async (req, res) => {
     // Validate email before proceeding
     const isValid = await validateEmail(emailLowerCase);
     if (!isValid) {
-      return res.status(400).json({ message: "Invalid email address", success: false });
+      return res.status(400).json({ message: "Invalid email", success: false }); // ✅ Fixed error message
     }
 
     // Check if user already exists in the selected collection
@@ -52,6 +52,7 @@ const registerController = async (req, res) => {
     res.status(500).json({ message: `Server error: ${error.message}`, success: false });
   }
 };
+
 
 const loginController = async (req, res) => {
   try {
