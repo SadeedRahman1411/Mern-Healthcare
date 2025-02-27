@@ -1,58 +1,110 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #1a1a1a;
-    color: #ffffff;
-    padding: 10px 20px;
-  }
-  
-  .navbar-brand {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  
-  .navbar-links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .navbar-links li {
-    display: inline;
-  }
-  
-  .navbar-links a {
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 1rem;
-  }
-  
-  .navbar-signin {
-    margin-left: auto;
-  }
-  
-  .btn-signin {
-    text-decoration: none;
-    color: #00d0ff;
-    border: 1px solid #00d0ff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .btn-signin:hover {
-    background-color: #00d0ff;
-    color: #ffffff;
-  }
-  
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6; /* Improved readability */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+}
+
+.navbar-brand {
+  font-size: 1.5rem; /* Slightly larger for emphasis */
+  font-weight: bold;
+  color: #00d0ff; /* Brand color for consistency */
+}
+
+.navbar-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-links li {
+  display: inline;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.navbar-links a:hover {
+  color: #00d0ff; /* Highlight color on hover */
+}
+
+.navbar-signin {
+  margin-left: auto;
+}
+
+.btn-signin {
+  text-decoration: none;
+  color: #00d0ff;
+  border: 1px solid #00d0ff;
+  padding: 8px 16px; /* Slightly larger padding for better clickability */
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-signin:hover {
+  background-color: #00d0ff;
+  color: #ffffff;
+}
+
+/* Custom CSS for smaller cards */
+.custom-card {
+  max-width: 500px; /* Reduced card width */
+  margin: 0 auto; /* Center the card */
+  border: 1px solid #ddd; /* Added border for better definition */
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden; /* Ensure content stays within the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.custom-card-img {
+  height: 150px; /* Reduced image height */
+  object-fit: cover; /* Ensure the image covers the area */
+  width: 100%; /* Ensure the image takes full width */
+}
+
+.custom-card .card-body {
+  padding: 15px; /* Reduced padding inside the card */
+}
+
+.custom-card .card-title {
+  font-size: 1.1rem; /* Smaller title */
+  margin-bottom: 10px; /* Reduced margin */
+}
+
+.custom-card .card-subtitle {
+  font-size: 0.9rem; /* Smaller subtitle */
+  color: #6c757d; /* Muted color */
+}
+
+.custom-card .card-text {
+  font-size: 0.9rem; /* Smaller text */
+  margin-bottom: 15px; /* Reduced margin */
+}
+
+.custom-card .btn {
+  font-size: 0.9rem; /* Smaller button text */
+  padding: 8px 16px; /* Smaller button padding */
+}
+
+/* Add gap between filter section and cards section */
+.cards-section {
+  margin-top: 40px; /* Add 40px gap between filter and cards */
+}

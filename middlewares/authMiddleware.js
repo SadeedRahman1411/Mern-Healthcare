@@ -1,4 +1,3 @@
-// authMiddleware.js (Fixed Token Extraction)
 const JWT = require("jsonwebtoken");
 
 module.exports = async (req, res, next) => {
@@ -14,6 +13,7 @@ module.exports = async (req, res, next) => {
         return res.status(401).send({ message: "Auth Failed", success: false });
       }
       req.body.userId = decode.id;
+      req.body.userType = decode.userType;
       next();
     });
   } catch (error) {

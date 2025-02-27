@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./AmbulanceService.css"; // Custom CSS for AmbulanceService
 import { Link } from "react-router-dom"; // React Router for navigation
 import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap CSS
@@ -14,13 +14,34 @@ const AmbulanceService = () => {
   const [contactNumber, setContactNumber] = useState("");
   const [contactError, setContactError] = useState("");
   const [formErrors, setFormErrors] = useState({});
-  const fromLocationRef = useRef(null); // Ref for the "From Location" input field
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedArea, setSelectedArea] = useState("");
+  const [areas, setAreas] = useState([]);
+
+  // Bangladesh cities and areas data
+  const citiesAndAreas = {
+    Dhaka: ["Mirpur", "Uttara", "Dhanmondi", "Gulshan", "Banani", "Mohammadpur", "Motijheel", "Badda"],
+    Chittagong: ["Agrabad", "Nasirabad", "Khulshi", "Halishahar", "Patenga", "GEC Circle", "Chawkbazar"],
+    Rajshahi: ["Boalia", "Motihar", "Rajpara", "Shaheb Bazar", "Upashahar", "Kazla"],
+    Khulna: ["Sonadanga", "Boyra", "Khalishpur", "Daulatpur", "Gollamari", "Khan Jahan Ali"],
+    Sylhet: ["Zindabazar", "Ambarkhana", "Upashahar", "Shibganj", "Subidbazar", "Tilagor"],
+    Barisal: ["Notullabad", "Rupatali", "Amanatganj", "Chor Kaua", "Sadar Road", "Kashipur"],
+    Rangpur: ["Modern More", "Dhap", "Shapla Chottor", "R.K. Road", "Jahaj Company More"],
+    Mymensingh: ["Ganginar Par", "Maskanda", "Chorpara", "Valuka", "Kalibari"],
+  };
+
+  // Update areas when city changes
+  useEffect(() => {
+    if (selectedCity) {
+      setAreas(citiesAndAreas[selectedCity] || []);
+      setSelectedArea("");
+    } else {
+      setAreas([]);
+    }
+  }, [selectedCity]);
 
   const handleBookNowClick = (ambulanceType) => {
     setSelectedAmbulanceType(ambulanceType);
-    if (fromLocationRef.current) {
-      fromLocationRef.current.focus(); // Focus the "From Location" input field
-    }
   };
 
   const validateContactNumber = (number) => {
@@ -59,23 +80,27 @@ const AmbulanceService = () => {
     }
   };
 
-  const handleDateChange = (e) => {
+  const handleCityChange = (e) => {
     const value = e.target.value;
+    setSelectedCity(value);
     // Clear the error if the input is valid
     if (value) {
-      setFormErrors((prevErrors) => ({ ...prevErrors, date: "" }));
+      setFormErrors((prevErrors) => ({ ...prevErrors, city: "" }));
+    }
+  };
+
+  const handleAreaChange = (e) => {
+    const value = e.target.value;
+    setSelectedArea(value);
+    // Clear the error if the input is valid
+    if (value) {
+      setFormErrors((prevErrors) => ({ ...prevErrors, area: "" }));
     }
   };
 
   const validateForm = () => {
     const errors = {};
 
-    if (!fromLocationRef.current?.value) {
-      errors.fromLocation = "From Location is required.";
-    }
-    if (!document.getElementById("toLocation").value) {
-      errors.toLocation = "To Destination is required.";
-    }
     if (!selectedAmbulanceType) {
       errors.ambulanceType = "Ambulance Type is required.";
     }
@@ -84,8 +109,11 @@ const AmbulanceService = () => {
     } else if (contactError) {
       errors.contactNumber = contactError;
     }
-    if (!document.getElementById("date").value) {
-      errors.date = "Date & Time is required.";
+    if (!selectedCity) {
+      errors.city = "City is required.";
+    }
+    if (!selectedArea) {
+      errors.area = "Area is required.";
     }
 
     setFormErrors(errors);
@@ -139,14 +167,6 @@ const AmbulanceService = () => {
           Rent a prompt, high-quality ambulance for your emergency needs.
           Trusted drivers, certified services, and on-time guarantee.
         </p>
-        <div className="search-bar mx-auto d-flex align-items-center">
-          <input
-            type="text"
-            className="form-control me-2"
-            placeholder="Search ambulance types or services..."
-          />
-          <button className="btn btn-primary">Search</button>
-        </div>
       </header>
 
       {/* Ambulance Types Section */}
@@ -202,7 +222,7 @@ const AmbulanceService = () => {
 
       {/* Request Form Section */}
       <section className="form-section container py-5">
-        <h2 className="text-center text-primary mb-4">Request an Ambulance</h2>
+        <h2 className="text-center text-primary mb-4">Register an Ambulance</h2>
         <form
           id="ambulance-form"
           className="mx-auto"
@@ -210,38 +230,52 @@ const AmbulanceService = () => {
           onSubmit={handleSubmit}
           noValidate // Disable HTML5 validation to use custom validation
         >
-          {/* From Location */}
+          {/* City */}
           <div className="mb-3">
-            <label htmlFor="fromLocation" className="form-label">
-              From Location
+            <label htmlFor="city" className="form-label">
+              City
             </label>
-            <input
-              type="text"
-              className={`form-control ${formErrors.fromLocation ? "is-invalid" : ""}`}
-              id="fromLocation"
-              placeholder="Enter starting location"
-              ref={fromLocationRef}
+            <select
+              className={`form-select ${formErrors.city ? "is-invalid" : ""}`}
+              id="city"
+              value={selectedCity}
+              onChange={handleCityChange}
               required
-            />
-            {formErrors.fromLocation && (
-              <div className="invalid-feedback">{formErrors.fromLocation}</div>
+            >
+              <option value="">Select City</option>
+              {Object.keys(citiesAndAreas).map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
+            </select>
+            {formErrors.city && (
+              <div className="invalid-feedback">{formErrors.city}</div>
             )}
           </div>
 
-          {/* To Destination */}
+          {/* Area */}
           <div className="mb-3">
-            <label htmlFor="toLocation" className="form-label">
-              To Destination
+            <label htmlFor="area" className="form-label">
+              Area
             </label>
-            <input
-              type="text"
-              className={`form-control ${formErrors.toLocation ? "is-invalid" : ""}`}
-              id="toLocation"
-              placeholder="Enter destination"
+            <select
+              className={`form-select ${formErrors.area ? "is-invalid" : ""}`}
+              id="area"
+              value={selectedArea}
+              onChange={handleAreaChange}
+              disabled={!selectedCity}
               required
-            />
-            {formErrors.toLocation && (
-              <div className="invalid-feedback">{formErrors.toLocation}</div>
+            >
+              <option value="">Select Area</option>
+              {areas.map((area) => (
+                <option key={area} value={area}>
+                  {area}
+                </option>
+              ))}
+            </select>
+            {formErrors.area && (
+              <div className="invalid-feedback">{formErrors.area}</div>
             )}
           </div>
 
@@ -286,23 +320,6 @@ const AmbulanceService = () => {
             )}
           </div>
 
-          {/* Date & Time */}
-          <div className="mb-3">
-            <label htmlFor="date" className="form-label">
-              Date & Time
-            </label>
-            <input
-              type="datetime-local"
-              className={`form-control ${formErrors.date ? "is-invalid" : ""}`}
-              id="date"
-              onChange={handleDateChange}
-              required
-            />
-            {formErrors.date && (
-              <div className="invalid-feedback">{formErrors.date}</div>
-            )}
-          </div>
-
           {/* Submit Button */}
           <button type="submit" className="btn btn-primary w-100">
             Submit Request
@@ -317,7 +334,6 @@ const AmbulanceService = () => {
           We are on a mission to make quality healthcare affordable and accessible for the people of Bangladesh.
         </p>
       </footer>
-
     </div>
   );
 };

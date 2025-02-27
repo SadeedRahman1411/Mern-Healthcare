@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Added useNavigate
-import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap CSS
-import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Bootstrap JS
+import { Link, useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 // Importing images
 import videoCalling from "./homepage/videoCalling.jpg";
@@ -16,53 +16,45 @@ const services = [
     title: "Video Consultancy",
     description: "Consult with the best doctors through video call.",
     img: videoCalling,
-    path: "/", // Unique link for this service
+    path: "/",
   },
   {
     title: "Chamber Appointment",
     description: "Book your appointment easily with a few clicks.",
     img: chamber,
-    path: "/chamberapp", // Unique link for this service
+    path: "/chamberapp",
   },
   {
     title: "Doctor At Your Home",
     description: "Book a doctor to visit you at home.",
     img: doctorHome,
-    path: "/doctorhome", // Unique link for this service
+    path: "/doctorhome",
   },
   {
     title: "Ambulance Service",
     description: "24/7 Emergency Ambulance Service.",
     img: ambulance,
-    path: "/ambulanceservice", // Unique link for this service
+    path: "/ambulanceservice",
   },
   {
     title: "Blood Donation",
     description: "Donate blood and save lives. Schedule your donation easily.",
     img: bloodDonation,
-    path: "/bloodreq", // Unique link for this service
+    path: "/bloodreq",
   },
 ];
 
 const Homepage = () => {
-  const navigate = useNavigate(); // Added navigate hook
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
-  const token = localStorage.getItem("token") || sessionStorage.getItem("token"); // Check if the user is logged in
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 
   useEffect(() => {
     if (token) {
-      setIsLoggedIn(true); // Set login state to true if token exists
+      setIsLoggedIn(true);
     }
   }, [token]);
 
-  // Handle logout
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    sessionStorage.removeItem("token"); // In case the token is stored in sessionStorage
-    setIsLoggedIn(false); // Set login state to false after logout
-  };
-
-  // Handle Sign In button click (Redirect to login page)
   const handleSignIn = () => {
     navigate("/login");
   };
@@ -109,26 +101,22 @@ const Homepage = () => {
                 </Link>
               </li>
 
-              {/* Conditionally render Sign In or Logout */}
+              {/* Conditionally render Sign In or Profile */}
               {!isLoggedIn ? (
                 <li className="nav-item">
                   <button
                     className="btn btn-outline-primary ms-2"
                     onClick={handleSignIn}
-                    disabled={isLoggedIn} // Disable Sign In button when logged in
+                    disabled={isLoggedIn}
                   >
                     Sign In
                   </button>
                 </li>
               ) : (
                 <li className="nav-item">
-                  <button
-                    className="btn btn-outline-danger ms-2"
-                    onClick={handleLogout}
-                    disabled={!isLoggedIn} // Disable Logout button when not logged in
-                  >
-                    Logout
-                  </button>
+                  <Link to="/profile" className="btn btn-outline-success ms-2">
+                    Profile
+                  </Link>
                 </li>
               )}
             </ul>
@@ -140,18 +128,8 @@ const Homepage = () => {
       <header className="container text-center py-5">
         <h1 className="display-5 fw-bold">Book a Doctor's Appointment in Just 10 Minutes</h1>
         <p className="lead">
-          Say goodbye to endless phone calls and long queues. Book doctors'
-          appointments, video consultations, ambulance services, manage medical
-          records, and more. Take the first step towards better health.
+          Say goodbye to endless phone calls and long queues. Book doctors' appointments, video consultations, ambulance services, manage medical records, and more. Take the first step towards better health.
         </p>
-        <div className="search-bar mx-auto d-flex align-items-center">
-          <input
-            type="text"
-            className="form-control me-2"
-            placeholder="Search doctors, hospitals, clinics..."
-          />
-          <button className="btn btn-primary">Search</button>
-        </div>
       </header>
 
       {/* Services Section */}
@@ -160,11 +138,7 @@ const Homepage = () => {
           {services.map((service, index) => (
             <div key={index} className="col-lg-4 col-md-6 col-sm-12">
               <div className="card shadow-sm h-100">
-                <img
-                  src={service.img}
-                  className="card-img-top"
-                  alt={service.title}
-                />
+                <img src={service.img} className="card-img-top" alt={service.title} />
                 <div className="card-body text-center">
                   <h5 className="card-title">{service.title}</h5>
                   <p className="card-text">{service.description}</p>

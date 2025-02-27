@@ -10,6 +10,7 @@ import BloodRequest from "./pages/BloodRequest";
 import RequestList from "./pages/RequestList";
 import ContactUs from "./pages/ContactUs";
 import FAQ from "./pages/FAQ";
+import Profile from "./pages/Profile"; // Import Profile Page
 import { useSelector } from "react-redux";
 import Spinner from "./components/Spinner";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -23,7 +24,6 @@ function App() {
       <BrowserRouter>
         {loading && <Spinner />}
         <Routes>
-          {/* ✅ Public Homepage - Always accessible */}
           <Route path="/" element={<Homepage />} />
 
           {/* ✅ Protected Routes - Require authentication */}
@@ -75,40 +75,22 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/faq" element={<FAQ />} />
+
+          {/* ✅ Profile Page (Protected) */}
           <Route
-            path="/contactus"
+            path="/profile"
             element={
               <ProtectedRoute>
-                <ContactUs />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/faq"
-            element={
-              <ProtectedRoute>
-                <FAQ />
+                <Profile />
               </ProtectedRoute>
             }
           />
 
-          {/* ✅ Public Routes - Only accessible when logged OUT */}
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <Login />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/register"
-            element={
-              <PublicRoute>
-                <Register />
-              </PublicRoute>
-            }
-          />
+          {/* ✅ Public Routes */}
+          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
         </Routes>
       </BrowserRouter>
     </>
