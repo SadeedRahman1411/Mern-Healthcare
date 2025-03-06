@@ -1,49 +1,88 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./bloodRequestForm.css";
 
-const BloodRequestForm = ({ refreshRequests }) => {
+const BloodRequest = ({ refreshRequests }) => {
   const [formData, setFormData] = useState({
     bloodType: "",
-    address: "",
-    contact: "",
+    city: "",
   });
 
-  const [error, setError] = useState(""); // State for contact number validation error
+  const [bloodProfiles, setBloodProfiles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Bangladesh cities data
+  const cities = [
+    "Dhaka", "Chittagong", "Rajshahi", "Khulna", "Sylhet", "Barisal", "Rangpur", "Mymensingh"
+  ];
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
-    if (e.target.name === "contact") {
-      validateContact(e.target.value);
-    }
-  };
-
-  // Contact number validation: Must start with '01' and be exactly 11 digits
-  const validateContact = (contact) => {
-    const contactPattern = /^01\d{9}$/; // Starts with '01' and has exactly 11 digits
-    if (!contactPattern.test(contact)) {
-      setError("Contact number must be 11 digits and start with '01'.");
-    } else {
-      setError("");
-    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (error) return; // Prevent form submission if there's a validation error
 
-    const response = await fetch("http://localhost:5000/api/bloodRequests", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+    setIsLoading(true);
+    try {
+      // Load blood profiles related
+      const searchResults = await loadBloodProfiles(formData);
 
-    if (response.ok) {
-      setFormData({ bloodType: "", address: "", contact: "" });
-      refreshRequests();
+      // Here blood profiles are updated
+      setBloodProfiles(searchResults);
+
+      setFormData({ bloodType: "", city: "" });
+      //If it exists refresh request is valid,run the code.
+    } catch (error) {
+        console.error("Form Submission Error:", error);
+    } finally {
+      setIsLoading(false);
+      if(refreshRequests) {
+        refreshRequests();
+      }
     }
   };
 
+  //Function to load the blood profiles
+  const loadBloodProfiles = async (searchCriteria) => {
+      setIsLoading(true);
+      try {
+          //Make and process API request
+          const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+
+          //Make GET request to the blood profiles.
+          const response = await axios.get("/api/v1/user/bloodProfiles/",{
+            params: searchCriteria,  // Use params for passing search criteria
+            headers: { Authorization: `Bearer ${token}` },
+          });
+
+          console.log("Profiles Fetch API responded with status:", response.status);
+
+        if (response.status === 200 && response.data.success) {
+            if (response.data.profiles && response.data.profiles.length) {
+              alert("Found Profiles")
+              //We return data
+                return response.data.profiles
+            } else {
+                alert("No profiles found that match the criteria.");
+            }
+          }  else {
+              //Show an error message related if it failed
+              const errorText = await response.text();
+              console.error("Profile List API returned issue")
+          }
+      } catch (error) {
+        //Here the code handles if there is an issue running at all!
+        console.error("An error occurred during processing", error);
+      } finally {
+          //We stop it from loading.
+          setIsLoading(false);
+           navigate("/bloodreq");
+      }
+    };
   return (
     <>
       {/* Navbar */}
@@ -121,37 +160,28 @@ const BloodRequestForm = ({ refreshRequests }) => {
             </select>
           </div>
 
-          {/* Address */}
+          {/* City Select Box */}
           <div className="mb-3">
-            <input
-              type="text"
+            <select
               className="form-control"
-              name="address"
-              placeholder="Enter Address"
-              value={formData.address}
+              name="city"
+              value={formData.city}
               onChange={handleChange}
               required
-            />
-          </div>
-
-          {/* Contact Number */}
-          <div className="mb-3">
-            <input
-              type="tel"
-              className={`form-control ${error ? "is-invalid" : ""}`}
-              name="contact"
-              placeholder="Enter Contact Number"
-              value={formData.contact}
-              onChange={handleChange}
-              required
-            />
-            {error && <div className="text-danger mt-1">{error}</div>}
+            >
+              <option value="">Select City</option>
+              {cities.map((city) => (
+                <option key={city} value={city}>
+                  {city}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Buttons */}
           <div className="button-group d-flex justify-content-between">
-            <button type="submit" className="btn btn-danger" disabled={error}>
-              Submit Request
+            <button type="submit" className="btn btn-danger" disabled={isLoading}>
+              {isLoading ? "Loading..." : "Submit Request"}
             </button>
             <button type="button" className="btn btn-outline-secondary" onClick={() => window.location.href = "/learn-more"}>
               Learn More
@@ -160,15 +190,36 @@ const BloodRequestForm = ({ refreshRequests }) => {
         </form>
       </div>
 
+      {/* Blood Request Profile Display Area */}
+      <div className="container mt-5">
+        {bloodProfiles && bloodProfiles.length > 0 ? (
+          <>
+            <h4 className="text-center mb-4">Matching Blood Donor Profiles</h4>
+            <div className="blood-profile-container">
+              {bloodProfiles.map((profile, index) => (
+                <div className="blood-profile-card p-3 shadow bg-light rounded" key={index}>
+                  <h5 style={{textAlign: "center"}}>{profile.name}</h5>
+                  <p>Blood Type: {profile.bloodType}</p>
+                  <p>City: {profile.city}</p>
+                  <p>Area: {profile.area}</p>
+                  <p>Contact: {profile.contact}</p>
+                  {/* You can add more relevant info */}
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+           !isLoading && <p className="text-center">No matching blood profiles found.</p>
+        )}
+      </div>
+
       {/* Footer */}
       <footer className="bg-danger text-white text-center py-3 mt-4">
-        <p className="mb-0">&copy; 2025 ASAP Health Care Service. All Rights Reserved.</p>
+        <p className="mb-0">© 2025 ASAP Health Care Service. All Rights Reserved.</p>
         <p className="mb-0">We are on a mission to make quality healthcare affordable and accessible for the people of Bangladesh.</p>
       </footer>
-
     </>
   );
 };
 
-export default BloodRequestForm;
-
+export default BloodRequest;

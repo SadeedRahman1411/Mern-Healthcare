@@ -1,0 +1,24 @@
+.ambulance-profile {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  width: 250px; /* Adjust width of ambulance profile card */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out; /* Add a smooth transition on hover */
+}
+
+.ambulance-profile:hover {
+  transform: translateY(-5px); /* Lift the card slightly on hover */
+}
+
+.ambulance-profile h3 {
+  color: #007bff; /* Primary color for ambulance type */
+  margin-bottom: 10px;
+}
+
+.ambulance-profile p {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
+}

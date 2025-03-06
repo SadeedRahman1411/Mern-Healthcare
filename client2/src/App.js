@@ -11,6 +11,7 @@ import RequestList from "./pages/RequestList";
 import ContactUs from "./pages/ContactUs";
 import FAQ from "./pages/FAQ";
 import Profile from "./pages/Profile"; // Import Profile Page
+import AmbulanceList from "./pages/AmbulanceList"; // Import AmbulanceList Page
 import { useSelector } from "react-redux";
 import Spinner from "./components/Spinner";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -84,6 +85,16 @@ function App() {
             element={
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* ✅ AmbulanceList Page (Protected) */}
+          <Route
+            path="/ambulance-list"
+            element={
+              <ProtectedRoute>
+                <AmbulanceList />
               </ProtectedRoute>
             }
           />

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./AmbulanceService.css"; // Custom CSS for AmbulanceService
-import { Link } from "react-router-dom"; // React Router for navigation
-import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap CSS
-import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Bootstrap JS (optional)
+import "./AmbulanceService.css";
+import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import axios from "axios";
 
 // Importing images
 import acAmbulance from "./ambulanceservice/ambulance2.jpg";
@@ -20,29 +21,42 @@ const AmbulanceService = () => {
 
   // Bangladesh cities and areas data
   const citiesAndAreas = {
-    Dhaka: ["Mirpur", "Uttara", "Dhanmondi", "Gulshan", "Banani", "Mohammadpur", "Motijheel", "Badda"],
-    Chittagong: ["Agrabad", "Nasirabad", "Khulshi", "Halishahar", "Patenga", "GEC Circle", "Chawkbazar"],
-    Rajshahi: ["Boalia", "Motihar", "Rajpara", "Shaheb Bazar", "Upashahar", "Kazla"],
-    Khulna: ["Sonadanga", "Boyra", "Khalishpur", "Daulatpur", "Gollamari", "Khan Jahan Ali"],
-    Sylhet: ["Zindabazar", "Ambarkhana", "Upashahar", "Shibganj", "Subidbazar", "Tilagor"],
-    Barisal: ["Notullabad", "Rupatali", "Amanatganj", "Chor Kaua", "Sadar Road", "Kashipur"],
-    Rangpur: ["Modern More", "Dhap", "Shapla Chottor", "R.K. Road", "Jahaj Company More"],
-    Mymensingh: ["Ganginar Par", "Maskanda", "Chorpara", "Valuka", "Kalibari"],
+    Dhaka: [
+      "Mirpur", "Uttara", "Dhanmondi", "Gulshan", "Banani", "Mohammadpur", "Motijheel", "Badda"
+    ],
+    Chittagong: [
+      "Agrabad", "Nasirabad", "Khulshi", "Halishahar", "Patenga", "GEC Circle", "Chawkbazar"
+    ],
+    Rajshahi: [
+      "Boalia", "Motihar", "Rajpara", "Shaheb Bazar", "Upashahar", "Kazla"
+    ],
+    Khulna: [
+      "Sonadanga", "Boyra", "Khalishpur", "Daulatpur", "Gollamari", "Khan Jahan Ali"
+    ],
+    Sylhet: [
+      "Zindabazar", "Ambarkhana", "Upashahar", "Shibganj", "Subidbazar", "Tilagor"
+    ],
+    Barisal: [
+      "Notullabad", "Rupatali", "Amanatganj", "Chor Kaua", "Sadar Road", "Kashipur"
+    ],
+    Rangpur: [
+      "Modern More", "Dhap", "Shapla Chottor", "R.K. Road", "Jahaj Company More"
+    ],
+    Mymensingh: [
+      "Ganginar Par", "Maskanda", "Chorpara", "Valuka", "Kalibari"
+    ],
   };
 
   // Update areas when city changes
   useEffect(() => {
     if (selectedCity) {
-      setAreas(citiesAndAreas[selectedCity] || []);
+      const newAreas = citiesAndAreas[selectedCity] || [];
+      setAreas(newAreas);
       setSelectedArea("");
     } else {
       setAreas([]);
     }
   }, [selectedCity]);
-
-  const handleBookNowClick = (ambulanceType) => {
-    setSelectedAmbulanceType(ambulanceType);
-  };
 
   const validateContactNumber = (number) => {
     if (!/^\d+$/.test(number)) {
@@ -54,17 +68,15 @@ const AmbulanceService = () => {
     if (number.length !== 11) {
       return "Number must be 11 digits long.";
     }
-    return ""; // No error
+    return "";
   };
 
   const handleContactNumberChange = (e) => {
     const value = e.target.value;
-    // Allow only numeric input
     if (/^\d*$/.test(value)) {
       setContactNumber(value);
       const error = validateContactNumber(value);
       setContactError(error);
-      // Clear the error if the input is valid
       if (!error) {
         setFormErrors((prevErrors) => ({ ...prevErrors, contactNumber: "" }));
       }
@@ -74,7 +86,6 @@ const AmbulanceService = () => {
   const handleAmbulanceTypeChange = (e) => {
     const value = e.target.value;
     setSelectedAmbulanceType(value);
-    // Clear the error if the input is valid
     if (value) {
       setFormErrors((prevErrors) => ({ ...prevErrors, ambulanceType: "" }));
     }
@@ -83,7 +94,6 @@ const AmbulanceService = () => {
   const handleCityChange = (e) => {
     const value = e.target.value;
     setSelectedCity(value);
-    // Clear the error if the input is valid
     if (value) {
       setFormErrors((prevErrors) => ({ ...prevErrors, city: "" }));
     }
@@ -92,7 +102,6 @@ const AmbulanceService = () => {
   const handleAreaChange = (e) => {
     const value = e.target.value;
     setSelectedArea(value);
-    // Clear the error if the input is valid
     if (value) {
       setFormErrors((prevErrors) => ({ ...prevErrors, area: "" }));
     }
@@ -100,7 +109,6 @@ const AmbulanceService = () => {
 
   const validateForm = () => {
     const errors = {};
-
     if (!selectedAmbulanceType) {
       errors.ambulanceType = "Ambulance Type is required.";
     }
@@ -115,17 +123,41 @@ const AmbulanceService = () => {
     if (!selectedArea) {
       errors.area = "Area is required.";
     }
-
     setFormErrors(errors);
-    return Object.keys(errors).length === 0; // Return true if no errors
+    return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const isValid = validateForm();
     if (isValid) {
-      // If validation passes, proceed with form submission
-      alert("Form submitted successfully!");
+      try {
+        const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+        const response = await axios.post(
+          "/api/v1/user/ambulance/register",
+          {
+            city: selectedCity,
+            area: selectedArea,
+            ambulanceType: selectedAmbulanceType,
+            contactNumber: contactNumber,
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` }, // Fixed the string interpolation here
+          }
+        );
+        if (response.data.success) {
+          alert("Ambulance request submitted successfully!");
+          setSelectedCity("");
+          setSelectedArea("");
+          setSelectedAmbulanceType("");
+          setContactNumber("");
+        } else {
+          alert("Failed to submit the request. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error submitting the form:", error);
+        alert("An error occurred. Please try again.");
+      }
     }
   };
 
@@ -173,26 +205,22 @@ const AmbulanceService = () => {
       <section className="container py-5">
         <h2 className="text-center mb-4 text-primary">Ambulance Services We Offer</h2>
         <div className="row g-4">
-          {[
-            {
-              title: "AC Ambulance",
-              description:
-                "Best for transferring patients nearby, equipped with basic life support.",
-              img: acAmbulance,
-            },
-            {
-              title: "ICU Ambulance",
-              description:
-                "Specialized ambulance for critical patients requiring intensive care.",
-              img: icuAmbulance,
-            },
-            {
-              title: "Emergency Ambulance",
-              description:
-                "Available 24/7 for urgent medical transportation across the city.",
-              img: emergencyAmbulance,
-            },
-          ].map((ambulance, index) => (
+          {[{
+            title: "AC Ambulance",
+            description: "Best for transferring patients nearby, equipped with basic life support.",
+            img: acAmbulance,
+            type: "acAmbulance"
+          }, {
+            title: "ICU Ambulance",
+            description: "Specialized ambulance for critical patients requiring intensive care.",
+            img: icuAmbulance,
+            type: "icuAmbulance"
+          }, {
+            title: "Emergency Ambulance",
+            description: "Available 24/7 for urgent medical transportation across the city.",
+            img: emergencyAmbulance,
+            type: "emergencyAmbulance"
+          }].map((ambulance, index) => (
             <div key={index} className="col-lg-4 col-md-6 col-sm-12">
               <div className="card shadow-sm h-100">
                 <img
@@ -204,12 +232,8 @@ const AmbulanceService = () => {
                   <h5 className="card-title">{ambulance.title}</h5>
                   <p className="card-text">{ambulance.description}</p>
                   <Link
-                    to="/"
+                    to={`/ambulance-list`} // Corrected Link
                     className="btn btn-outline-primary"
-                    onClick={(e) => {
-                      e.preventDefault(); // Prevent navigation
-                      handleBookNowClick(ambulance.title);
-                    }}
                   >
                     Book Now
                   </Link>
@@ -228,7 +252,7 @@ const AmbulanceService = () => {
           className="mx-auto"
           style={{ maxWidth: "600px" }}
           onSubmit={handleSubmit}
-          noValidate // Disable HTML5 validation to use custom validation
+          noValidate
         >
           {/* City */}
           <div className="mb-3">
@@ -268,8 +292,8 @@ const AmbulanceService = () => {
               required
             >
               <option value="">Select Area</option>
-              {areas.map((area) => (
-                <option key={area} value={area}>
+              {areas.map((area, index) => (
+                <option key={index} value={area}>
                   {area}
                 </option>
               ))}
@@ -291,10 +315,10 @@ const AmbulanceService = () => {
               onChange={handleAmbulanceTypeChange}
               required
             >
-              <option value="">Please select an item in the list.</option>
-              <option>AC Ambulance</option>
-              <option>ICU Ambulance</option>
-              <option>Emergency Ambulance</option>
+              <option value="">Select Ambulance Type</option>
+              <option value="acAmbulance">AC Ambulance</option>
+              <option value="icuAmbulance">ICU Ambulance</option>
+              <option value="emergencyAmbulance">Emergency Ambulance</option>
             </select>
             {formErrors.ambulanceType && (
               <div className="invalid-feedback">{formErrors.ambulanceType}</div>
@@ -308,9 +332,8 @@ const AmbulanceService = () => {
             </label>
             <input
               type="text"
-              className={`form-control ${formErrors.contactNumber ? "is-invalid" : ""}`}
               id="contactNumber"
-              placeholder="Enter your contact number (e.g., 01123456789)"
+              className={`form-control ${formErrors.contactNumber ? "is-invalid" : ""}`}
               value={contactNumber}
               onChange={handleContactNumberChange}
               required
@@ -320,20 +343,11 @@ const AmbulanceService = () => {
             )}
           </div>
 
-          {/* Submit Button */}
           <button type="submit" className="btn btn-primary w-100">
             Submit Request
           </button>
         </form>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-dark text-white text-center py-3 mt-4">
-        <p className="mb-0">&copy; 2025 ASAP Health Care Service. All Rights Reserved.</p>
-        <p className="mb-0">
-          We are on a mission to make quality healthcare affordable and accessible for the people of Bangladesh.
-        </p>
-      </footer>
     </div>
   );
 };
