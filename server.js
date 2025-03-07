@@ -18,6 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
 
+
 // Routes
 app.use("/api/v1/user", require("./routes/userRoutes")); // User routes
 app.use("/api/v1/ambulance", require("./routes/userRoutes")); // Ambulance routes

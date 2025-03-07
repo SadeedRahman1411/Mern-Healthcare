@@ -1,0 +1,159 @@
+/* AmbulanceList.css - Modifications to match AmbulanceService.css */
+
+/* Import Fonts (if not already imported) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500&display=swap');
+
+/* Use same body style as AmbulanceService */
+body {
+    font-family: 'Poppins', 'Arial', sans-serif; /* Modern and clean font */
+    margin: 0;
+    padding: 0;
+    background-color: #f1f3f5;
+    color: #222831;
+}
+
+.ambulance-list-container {
+  font-family: sans-serif;
+  padding: 20px;
+  background-color: #f1f3f5; /* Consistent background */
+}
+
+.ambulance-list-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #00adb5;  /*Primary Color*/
+  font-family: 'Montserrat', 'Arial', sans-serif;
+}
+
+/* Style adjustments for filter section to match the form style */
+.filter-section {
+  display: flex;
+  justify-content: space-around; /* Distribute space evenly */
+  gap: 15px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fff; /* Add a white background */
+  border-radius: 25px;        /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  flex-wrap: wrap;          /* Allows items to wrap on smaller screens */
+}
+
+.filter-section select {
+    padding: 12px;           /* Taller padding */
+    border: 1px solid #ccc;
+    border-radius: 25px;     /* More rounded corners */
+    font-size: 1rem;          /* Larger font size */
+    width: 200px;            /* Set a fixed width */
+    appearance: none;         /* Remove default arrow */
+    background-color: #fff;   /* White background */
+    color: #222831;           /* Text color */
+    font-family: 'Poppins', 'Arial', sans-serif;
+}
+
+/* Hover and focus styles for the select boxes */
+.filter-section select:hover,
+.filter-section select:focus {
+    border-color: #00adb5;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 173, 181, 0.5);
+}
+
+
+/* Ambulances container - Keep similar layout */
+.ambulances-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.ambulances-container p {
+  text-align: center;
+  font-style: italic;
+  color: #777;
+}
+
+/* Hero Section (Copy from AmbulanceService) */
+header {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f1f3f5;
+    color: #eeeeee;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #222831;
+    font-family: 'Montserrat', 'Arial', sans-serif; /* Bold and elegant font for headings */
+    font-weight: 700; /* Bold weight for emphasis */
+}
+
+header p {
+    font-size: 1.25rem;
+    color: #6c757d; /* Adjusted for better readability */
+    font-family: 'Poppins', 'Arial', sans-serif; /* Consistent body font */
+}
+
+/* Form Section  (Copied from AmbulanceService, for consistent styling) */
+.form-section {
+    background-color: #f1f3f5;
+    padding: 40px 20px;
+    color: #222831;
+}
+
+.form-section h2 {
+    font-weight: bold;
+    color: #00adb5;
+    font-family: 'Montserrat', 'Arial', sans-serif; /* Consistent heading font */
+    text-align: center;
+}
+
+.form-section label {
+    font-size: 1rem;
+    color: #6c757d;
+    font-family: 'Poppins', 'Arial', sans-serif; /* Consistent body font */
+}
+
+.form-section select { /*Style same as filter section select*/
+    padding: 12px;           /* Taller padding */
+    border: 1px solid #ccc;
+    border-radius: 25px;     /* More rounded corners */
+    font-size: 1rem;          /* Larger font size */
+    width: 100%;            /* Take full width*/
+    appearance: none;         /* Remove default arrow */
+    background-color: #fff;   /* White background */
+    color: #222831;           /* Text color */
+    font-family: 'Poppins', 'Arial', sans-serif;
+}
+
+/*Validation error Style*/
+.error-message {
+  color: #dc3545;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Ambulance Profile Styling */
+.ambulance-profile-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.ambulance-profile-box {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Keep width like its own */
+  text-align: left;
+  font-family: 'Poppins', 'Arial', sans-serif;
+  word-wrap: break-word;
+}
+
+/* Style for the labels */
+.ambulance-label {
+  color: #00adb5; /* Light blue color */
+}

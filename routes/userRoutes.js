@@ -6,11 +6,15 @@ const {
     loginController,
     getUserInfoController,
     updateUserInfoController,
+    createBloodRequestController, // Add this line
+    getBloodProfiles,
+    getAllDoctorsController,
+} = require("../controllers/userCtrl");
+
+const {
     registerAmbulance,
     getAmbulances,
-    createBloodRequestController, // Add this line
-    getBloodProfiles
-} = require("../controllers/userCtrl");
+}= require("../controllers/ambulanceCtrl")
 
 const router = express.Router();
 
@@ -56,5 +60,7 @@ router.get("/ambulance/all", authMiddleware, getAmbulances);
 // Blood request route
 router.post("/bloodRequests", createBloodRequestController); // Add this line
 router.get("/bloodProfiles", authMiddleware, getBloodProfiles);
+
+router.get("/doctors", authMiddleware, getAllDoctorsController);
 
 module.exports = router;
