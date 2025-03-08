@@ -1,4 +1,4 @@
-// controllers/userCtrl.js
+// userCtrl.js
 const User = require("../models/userModels");
 const Doctor = require("../models/doctorModels");
 const Ambulance = require("../models/ambulanceModel");
@@ -84,6 +84,7 @@ const loginController = async (req, res) => {
       token,
       userId: user._id,
       userType: user.userType,
+      redirect: "/profile", // ADD THIS LINE
     });
   } catch (error) {
     console.error(error);

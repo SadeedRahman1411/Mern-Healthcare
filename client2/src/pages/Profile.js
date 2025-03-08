@@ -21,8 +21,11 @@ const Profile = () => {
       try {
         const token = localStorage.getItem("token") || sessionStorage.getItem("token");
         if (!token) {
-          navigate("/login");
-          return;
+          // Navigate to login only if user type is not doctor.
+          if (localStorage.getItem("userType") !== "doctor" && sessionStorage.getItem("userType") !== "doctor") {
+            navigate("/login");
+            return;
+          }
         }
 
         const res = await axios.get("/api/v1/user/getUserInfo", {
@@ -34,11 +37,17 @@ const Profile = () => {
           setFormData(res.data.user);
         } else {
           alert("Failed to fetch user data");
-          navigate("/login");
+          // Navigate to login only if user type is not doctor.
+          if (localStorage.getItem("userType") !== "doctor" && sessionStorage.getItem("userType") !== "doctor") {
+            navigate("/login");
+          }
         }
       } catch (error) {
         console.error("Error fetching user info:", error);
-        navigate("/login");
+        // Navigate to login only if user type is not doctor.
+        if (localStorage.getItem("userType") !== "doctor" && sessionStorage.getItem("userType") !== "doctor") {
+          navigate("/login");
+        }
       }
     };
 
@@ -100,9 +109,15 @@ const Profile = () => {
       {/* Navigation Bar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <Link className="navbar-brand" to="/">
-            ASAP Health Care Service
-          </Link>
+          {user && user.userType === "doctor" ? (
+            <span className="navbar-brand inactive-link">
+              ASAP Health Care Service
+            </span>
+          ) : (
+            <Link className="navbar-brand" to="/">
+              ASAP Health Care Service
+            </Link>
+          )}
           <div className="ms-auto">
             <button className="btn btn-danger" onClick={handleLogout}>
               Logout
@@ -120,7 +135,7 @@ const Profile = () => {
               <p><strong>Name:</strong> {user.name}</p>
               <p><strong>Email:</strong> {user.email}</p>
               <p><strong>Type:</strong> {user.userType === "doctor" ? "Doctor" : "Patient"}</p>
-              
+
               {user.userType === "patient" && (
                 <>
                   <div className="mb-3">
@@ -256,6 +271,12 @@ const Profile = () => {
             <p>Loading...</p>
           )}
         </div>
+         {/* Doctor Request List Button */}
+         {user && user.userType === "doctor" && (
+            <div className="text-center mt-2">
+              <Link to="/doctorhome" className="btn btn-info">Request List</Link>
+            </div>
+          )}
       </div>
     </div>
   );

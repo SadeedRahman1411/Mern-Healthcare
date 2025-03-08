@@ -108,3 +108,11 @@ body {
 .cards-section {
   margin-top: 40px; /* Add 40px gap between filter and cards */
 }
+
+/* Style for inactive link (non-clickable) */
+.inactive-link {
+  color: #aaa; /* or any muted color */
+  cursor: default; /*  Removes the pointer cursor */
+  pointer-events: none; /* Prevents any click interaction */
+  text-decoration: none; /* Optional: remove underline if it's an <a> tag */
+}

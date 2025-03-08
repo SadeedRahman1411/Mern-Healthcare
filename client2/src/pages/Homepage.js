@@ -6,7 +6,6 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 // Importing images
 import videoCalling from "./homepage/videoCalling.jpg";
 import chamber from "./homepage/chamber.jpg";
-import doctorHome from "./homepage/doctor_home.jpg";
 import ambulance from "./homepage/ambulace.jpg";
 import bloodDonation from "./homepage/blood_donation.jpg";
 
@@ -23,12 +22,6 @@ const services = [
     description: "Book your appointment easily with a few clicks.",
     img: chamber,
     path: "/chamberapp",
-  },
-  {
-    title: "Doctor At Your Home",
-    description: "Book a doctor to visit you at home.",
-    img: doctorHome,
-    path: "/doctorhome",
   },
   {
     title: "Ambulance Service",
@@ -48,12 +41,24 @@ const Homepage = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+  const userType = localStorage.getItem("userType");
 
   useEffect(() => {
+    console.log("useEffect triggered", token, userType);
     if (token) {
       setIsLoggedIn(true);
     }
-  }, [token]);
+
+    if (token && userType === "doctor") {
+      console.log("Navigating to /doctorhome");
+      navigate("/doctorhome");
+    }
+    if (token && userType === "patient") {
+      console.log("Navigating to /");
+      navigate("/");
+    }
+  
+  }, [token, navigate, userType]);
 
   const handleSignIn = () => {
     navigate("/login");
@@ -61,7 +66,6 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-      {/* Navigation Bar */}
       <nav className="navbar navbar-expand-lg navbar-dark">
         <div className="container">
           <Link className="navbar-brand" to="/">
@@ -101,7 +105,6 @@ const Homepage = () => {
                 </Link>
               </li>
 
-              {/* Conditionally render Sign In or Profile */}
               {!isLoggedIn ? (
                 <li className="nav-item">
                   <button
@@ -124,7 +127,6 @@ const Homepage = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
       <header className="container text-center py-5">
         <h1 className="display-5 fw-bold">Book a Doctor's Appointment in Just 10 Minutes</h1>
         <p className="lead">
@@ -132,7 +134,6 @@ const Homepage = () => {
         </p>
       </header>
 
-      {/* Services Section */}
       <section className="container py-5">
         <div className="row g-4">
           {services.map((service, index) => (
@@ -152,9 +153,8 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-dark text-white text-center py-3 mt-4">
-        <p className="mb-0">&copy; 2025 ASAP Health Care Service. All Rights Reserved.</p>
+        <p className="mb-0">© 2025 ASAP Health Care Service. All Rights Reserved.</p>
         <p className="mb-0">
           We are on a mission to make quality healthcare affordable and accessible for the people of Bangladesh.
         </p>

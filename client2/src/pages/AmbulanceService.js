@@ -18,6 +18,36 @@ const AmbulanceService = () => {
   const [selectedCity, setSelectedCity] = useState("");
   const [selectedArea, setSelectedArea] = useState("");
   const [areas, setAreas] = useState([]);
+  const [testUserId, setTestUserId] = useState("");
+  const [testUserType, setTestUserType] = useState("");
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+        if (!token) {
+          console.log("no token");
+          return;
+        }
+
+        const res = await axios.get("/api/v1/user/getUserInfo", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        if (res.data.success) {
+          setTestUserId(res.data.user._id);
+          setTestUserType(res.data.user.userType);
+        } else {
+          console.log("fetch fail");
+        }
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    };
+    fetchUserProfile();
+  }, []);
 
   // Bangladesh cities and areas data
   const citiesAndAreas = {
@@ -133,6 +163,15 @@ const AmbulanceService = () => {
     if (isValid) {
       try {
         const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+
+        console.log("Submitting Ambulance Request with:");
+        console.log("  City:", selectedCity);
+        console.log("  Area:", selectedArea);
+        console.log("  Ambulance Type:", selectedAmbulanceType);
+        console.log("  Contact Number:", contactNumber);
+        console.log("  User ID:", testUserId);
+        console.log("  User Type:", testUserType);
+
         const response = await axios.post(
           "/api/v1/user/ambulance/register",
           {
@@ -140,9 +179,16 @@ const AmbulanceService = () => {
             area: selectedArea,
             ambulanceType: selectedAmbulanceType,
             contactNumber: contactNumber,
+            createdBy: testUserId,
+            createdByType: testUserType,
+            userId: testUserId,
+            userType: testUserType
           },
           {
-            headers: { Authorization: `Bearer ${token}` }, // Fixed the string interpolation here
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            },
           }
         );
         if (response.data.success) {
@@ -152,11 +198,12 @@ const AmbulanceService = () => {
           setSelectedAmbulanceType("");
           setContactNumber("");
         } else {
-          alert("Failed to submit the request. Please try again.");
+          console.error("Failed to submit the request:", response.data);
+          alert(`Failed to submit the request: ${response.data.message || "Unknown error"}. Please try again.`);
         }
       } catch (error) {
-        console.error("Error submitting the form:", error);
-        alert("An error occurred. Please try again.");
+        console.error("Error submitting the form:", error.response ? error.response.data : error.message);
+        alert(`An error occurred: ${error.response ? error.response.data.message : error.message}. Please try again.`);
       }
     }
   };
@@ -205,42 +252,44 @@ const AmbulanceService = () => {
       <section className="container py-5">
         <h2 className="text-center mb-4 text-primary">Ambulance Services We Offer</h2>
         <div className="row g-4">
-          {[{
-            title: "AC Ambulance",
-            description: "Best for transferring patients nearby, equipped with basic life support.",
-            img: acAmbulance,
-            type: "acAmbulance"
-          }, {
-            title: "ICU Ambulance",
-            description: "Specialized ambulance for critical patients requiring intensive care.",
-            img: icuAmbulance,
-            type: "icuAmbulance"
-          }, {
-            title: "Emergency Ambulance",
-            description: "Available 24/7 for urgent medical transportation across the city.",
-            img: emergencyAmbulance,
-            type: "emergencyAmbulance"
-          }].map((ambulance, index) => (
-            <div key={index} className="col-lg-4 col-md-6 col-sm-12">
-              <div className="card shadow-sm h-100">
-                <img
-                  src={ambulance.img}
-                  className="card-img-top"
-                  alt={ambulance.title}
-                />
-                <div className="card-body text-center">
-                  <h5 className="card-title">{ambulance.title}</h5>
-                  <p className="card-text">{ambulance.description}</p>
-                  <Link
-                    to={`/ambulance-list`} // Corrected Link
-                    className="btn btn-outline-primary"
-                  >
-                    Book Now
-                  </Link>
+          {
+            [{
+                title: "AC Ambulance",
+                description: "Best for transferring patients nearby, equipped with basic life support.",
+                img: acAmbulance,
+                type: "acAmbulance"
+              },
+              {
+                title: "ICU Ambulance",
+                description: "Specialized ambulance for critical patients requiring intensive care.",
+                img: icuAmbulance,
+                type: "icuAmbulance"
+              },
+              {
+                title: "Emergency Ambulance",
+                description: "Available 24/7 for urgent medical transportation across the city.",
+                img: emergencyAmbulance,
+                type: "emergencyAmbulance"
+              }
+            ].map((ambulance, index) => (
+              <div key={index} className="col-lg-4 col-md-6 col-sm-12">
+                <div className="card shadow-sm h-100">
+                  <img
+                    src={ambulance.img}
+                    className="card-img-top"
+                    alt={ambulance.title}
+                  />
+                  <div className="card-body text-center">
+                    <h5 className="card-title">{ambulance.title}</h5>
+                    <p className="card-text">{ambulance.description}</p>
+                    <Link to={`/ambulance-list`} className="btn btn-outline-primary">
+                      Book Now
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </section>
 

@@ -1,3 +1,4 @@
+// Login.js
 import React, { useState } from "react";
 import "./Login.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -21,12 +22,15 @@ const Login = () => {
       if (res.data.success) {
         const rememberMe = document.getElementById("remember").checked;
         if (rememberMe) {
-          localStorage.setItem("token", res.data.token); // Persist after restart
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("userType", res.data.userType);
         } else {
-          sessionStorage.setItem("token", res.data.token); // Clear on restart
+          sessionStorage.setItem("token", res.data.token);
+          sessionStorage.setItem("userType", res.data.userType);
         }
         alert("Login Successfully");
-        navigate("/");
+        navigate("/profile");  // Redirect all users to /profile
+
       } else {
         alert(res.data.message);
       }
@@ -39,7 +43,6 @@ const Login = () => {
 
   return (
     <div>
-      {/* Navigation Bar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
           <Link className="navbar-brand" to="/">
@@ -48,7 +51,6 @@ const Login = () => {
         </div>
       </nav>
 
-      {/* Login Form */}
       <div className="login-container">
         <div className="login-form">
           <h3 className="login-heading">Login Form</h3>
