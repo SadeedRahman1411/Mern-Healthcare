@@ -1,3 +1,4 @@
+// ChamberAppointment.js
 import React, { useEffect, useState } from "react";
 import "./ChamberAppointment.css";
 import { Link } from "react-router-dom";
@@ -7,16 +8,16 @@ import axios from "axios";
 
 const ChamberAppointment = () => {
   const [doctors, setDoctors] = useState([]);
+  const [bookedDoctors, setBookedDoctors] = useState({});
 
   useEffect(() => {
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+
     const fetchDoctors = async () => {
       try {
-        const token = localStorage.getItem("token") || sessionStorage.getItem("token");
-
         const response = await axios.get("/api/v1/user/doctors", {
-          headers: { Authorization: `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` },
         });
-
         if (response.data.success) {
           setDoctors(response.data.doctors);
         } else {
@@ -27,17 +28,62 @@ const ChamberAppointment = () => {
       }
     };
 
+    const fetchAppointments = async () => {
+      try {
+        const response = await axios.get("/api/v1/user/appointments", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (response.data.success) {
+          const booked = {};
+          response.data.appointments.forEach((appointment) => {
+            // Mark as booked if status is "pending" or "confirmed"
+            if (appointment.status === "pending" || appointment.status === "confirmed") {
+              booked[appointment.doctorId] = true;
+            }
+          });
+          setBookedDoctors(booked);
+        } else {
+          console.error("Error fetching appointments:", response.data.message);
+        }
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      }
+    };
+
     fetchDoctors();
+    fetchAppointments();
   }, []);
+
+  const handleBookAppointment = async (doctorId) => {
+    const confirmBooking = window.confirm("Do you want to book this appointment?");
+    if (confirmBooking) {
+      try {
+        const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+        const response = await axios.post(
+          "/api/v1/user/book-appointment",
+          { doctorId },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        if (response.data.success) {
+          setBookedDoctors((prev) => ({ ...prev, [doctorId]: true }));
+          alert("Appointment booked successfully! Your request is pending.");
+        } else {
+          console.error("Booking error:", response.data.message);
+          alert("There was an issue booking your appointment. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error booking appointment:", error);
+        alert("Server error. Please try again later.");
+      }
+    }
+  };
 
   return (
     <div className="chamber-appointment">
       {/* Navigation Bar */}
       <nav className="navbar navbar-expand-lg navbar-dark">
         <div className="container">
-          <Link className="navbar-brand" to="/">
-            ASAP Health Care Service
-          </Link>
+          <Link className="navbar-brand" to="/">ASAP Health Care Service</Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -52,9 +98,7 @@ const ChamberAppointment = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link className="btn btn-outline-primary ms-2" to="/login">
-                  Sign In
-                </Link>
+                <Link className="btn btn-outline-primary ms-2" to="/login">Sign In</Link>
               </li>
             </ul>
           </div>
@@ -85,9 +129,13 @@ const ChamberAppointment = () => {
                     <strong>Degree:</strong> {doctor.degree} <br />
                     <strong>Contact Number:</strong> {doctor.contactNumber}
                   </p>
-                  <Link to="/chamberapp" className="btn btn-outline-primary">
-                    Book Appointment
-                  </Link>
+                  <button
+                    className={`btn ${bookedDoctors[doctor._id] ? "btn-success" : "btn-outline-primary"}`}
+                    onClick={() => handleBookAppointment(doctor._id)}
+                    disabled={!!bookedDoctors[doctor._id]}
+                  >
+                    {bookedDoctors[doctor._id] ? "Booked" : "Book Appointment"}
+                  </button>
                 </div>
               </div>
             </div>
@@ -97,12 +145,9 @@ const ChamberAppointment = () => {
 
       {/* Footer */}
       <footer className="bg-dark text-white text-center py-3 mt-4">
+        <p className="mb-0">© 2025 ASAP Health Care Service. All Rights Reserved.</p>
         <p className="mb-0">
-          © 2025 ASAP Health Care Service. All Rights Reserved.
-        </p>
-        <p className="mb-0">
-          We are on a mission to make quality healthcare affordable and
-          accessible for the people of Bangladesh.
+          We are on a mission to make quality healthcare affordable and accessible for the people of Bangladesh.
         </p>
       </footer>
     </div>
